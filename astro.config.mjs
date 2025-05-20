@@ -6,5 +6,6 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 
 export default defineConfig({
-	base: '/harry-blog/', // 子路徑部署
+	site: 'http://localhost:4321/harry-blog/',  // 👈 加上這行
+	base: '/harry-blog/',
 });
