@@ -6,6 +6,11 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 
 export default defineConfig({
-	site: 'http://localhost:4321/harry-blog/',  // 👈 加上這行
-	base: '/harry-blog/',
+  // For production
+  site: 'https://harryfan.github.io/harry-blog/',
+  
+  // For local development (uncomment when developing locally)
+  // site: 'http://localhost:4321/harry-blog/',
+  
+  base: '/harry-blog/',
 });
