@@ -6,12 +6,17 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "deploy": "npm run build && gh-pages -d dist -b gh-pages",
+    "deploy:ci": "npm run build && gh-pages -d dist -b gh-pages -r https://$GITHUB_TOKEN@github.com/harryfan/harry-blog.git"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.2.6",
     "@astrojs/rss": "^4.0.11",
     "@astrojs/sitemap": "^3.4.0",
     "astro": "^5.7.13"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
   }
 }
