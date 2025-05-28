@@ -19,6 +19,21 @@ const posts = (await getCollection('blog')).sort(
 			main {
 				width: 960px;
 			}
+			.intro-section {
+				margin-bottom: 3rem;
+				padding: 2rem;
+				background: #f9f9f9;
+				border-radius: 12px;
+				text-align: center;
+			}
+			.intro-section h2 {
+				color: rgb(var(--black));
+				margin-bottom: 1.5rem;
+			}
+			.intro-section p {
+				line-height: 1.6;
+				margin-bottom: 1rem;
+			}
 			ul {
 				display: flex;
 				flex-wrap: wrap;
@@ -82,12 +97,36 @@ const posts = (await getCollection('blog')).sort(
 				ul li:first-child .title {
 					font-size: 1.563em;
 				}
+				.intro-section {
+					padding: 1rem;
+				}
 			}
 		</style>
 	</head>
 	<body>
 		<Header />
 		<main>
+			<section class="intro-section">
+				<h2>我是 Harry, 與您分享前端的路上會用到的一些技巧及觀念</h2>
+				
+				<div style="text-align: center;">
+					<img 
+						src="/images/harry-fan.webp" 
+						alt="Harry Fan" 
+						style="max-width: 300px; border-radius: 50%; margin: 0 auto; display: block;" 
+					/>
+					<p style="font-style: italic; margin-top: 10px;">(手上拿的不是衛生紙，是烤鴨三吃)</p>
+				</div>
+				
+				<p>每個人看事情的觀點及角度、生命歷程都不一樣，一切以你思考過後得到的想法為主。</p>
+				
+				<p>歡迎之後有其他前端聚會可以邀請我參加，只要我時間允許，歡迎告訴我活動訊息。</p>
+				
+				<p>我的連絡電子信箱：harry750110@gmail.com<br/>
+				Line：harryvan<br/>
+				臉書：Harris Fan</p>
+			</section>
+			
 			<section>
 				<ul>
 					{
