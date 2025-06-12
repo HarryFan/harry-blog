@@ -7,10 +7,12 @@ const $$HeaderLink = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro, $$props, $$slots);
   Astro2.self = $$HeaderLink;
   const { href, class: className, ...props } = Astro2.props;
+  const rawHref = typeof href === "string" ? href : href?.toString() ?? "/";
   const pathname = Astro2.url.pathname.replace("/harry-blog/", "");
   const subpath = pathname.match(/[^\/]+/g);
-  const isActive = href === pathname || href === "/" + (subpath?.[0] || "");
-  return renderTemplate`${maybeRenderHead()}<a${addAttribute(href, "href")}${addAttribute([className, { active: isActive }], "class:list")}${spreadAttributes(props)} data-astro-cid-eimmu3lg> ${renderSlot($$result, $$slots["default"])} </a> `;
+  const isActive = rawHref === pathname || rawHref === "/" + (subpath?.[0] || "");
+  const resolvedHref = rawHref.startsWith("/") ? `${"/harry-blog/"}${rawHref.slice(1)}` : rawHref;
+  return renderTemplate`${maybeRenderHead()}<a${addAttribute(resolvedHref, "href")}${addAttribute([className, { active: isActive }], "class:list")}${spreadAttributes(props)} data-astro-cid-eimmu3lg> ${renderSlot($$result, $$slots["default"])} </a> `;
 }, "/Users/harry/Documents/Astro/harry-blog/src/components/HeaderLink.astro", void 0);
 
 export { $$HeaderLink as $ };
