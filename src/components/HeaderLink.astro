@@ -4,12 +4,21 @@ import type { HTMLAttributes } from 'astro/types';
 type Props = HTMLAttributes<'a'>;
 
 const { href, class: className, ...props } = Astro.props;
+// 確保 href 為字串
+const rawHref = typeof href === 'string' ? href : href?.toString() ?? '/';
+
+// 取得目前路徑，去除 base path
 const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, '');
 const subpath = pathname.match(/[^\/]+/g);
-const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
+const isActive = rawHref === pathname || rawHref === '/' + (subpath?.[0] || '');
+
+// 若為站內連結 (以 / 開頭)，自動補上 base path，避免在子目錄部署時 404
+const resolvedHref = rawHref.startsWith('/')
+  ? `${import.meta.env.BASE_URL}${rawHref.slice(1)}`
+  : rawHref;
 ---
 
-<a href={href} class:list={[className, { active: isActive }]} {...props}>
+<a href={resolvedHref} class:list={[className, { active: isActive }]} {...props}>
 	<slot />
 </a>
 <style>
