@@ -11,6 +11,6 @@ const $$HeaderLink = createComponent(($$result, $$props, $$slots) => {
   const subpath = pathname.match(/[^\/]+/g);
   const isActive = href === pathname || href === "/" + (subpath?.[0] || "");
   return renderTemplate`${maybeRenderHead()}<a${addAttribute(href, "href")}${addAttribute([className, { active: isActive }], "class:list")}${spreadAttributes(props)} data-astro-cid-eimmu3lg> ${renderSlot($$result, $$slots["default"])} </a> `;
-}, "/Users/gangshuanfan/Documents/Astro/harry-blog/src/components/HeaderLink.astro", void 0);
+}, "/Users/harry/Documents/Astro/harry-blog/src/components/HeaderLink.astro", void 0);
 
 export { $$HeaderLink as $ };

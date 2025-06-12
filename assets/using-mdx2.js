@@ -100,14 +100,14 @@ function MDXContent(props = {}) {
 }
 
 const url = "src/content/blog/using-mdx.mdx";
-const file = "/Users/gangshuanfan/Documents/Astro/harry-blog/src/content/blog/using-mdx.mdx";
+const file = "/Users/harry/Documents/Astro/harry-blog/src/content/blog/using-mdx.mdx";
 const Content = (props = {}) => MDXContent({
   ...props,
   components: { Fragment: Fragment, ...props.components, },
 });
 Content[Symbol.for('mdx-component')] = true;
 Content[Symbol.for('astro.needsHeadRendering')] = !Boolean(frontmatter.layout);
-Content.moduleId = "/Users/gangshuanfan/Documents/Astro/harry-blog/src/content/blog/using-mdx.mdx";
+Content.moduleId = "/Users/harry/Documents/Astro/harry-blog/src/content/blog/using-mdx.mdx";
 __astro_tag_component__(Content, 'astro:jsx');
 
 export { Content, Content as default, file, frontmatter, getHeadings, url };
