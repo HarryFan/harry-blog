@@ -3,7 +3,8 @@ title: '🚀 網站最佳化大揭密：GA4資料追蹤與前端效能提升的�
 pubDate: 2025-06-12
 description: '探索如何透過 GA4 資料追蹤與前端效能優化技術，讓您的網站跑得更快、更聰明，同時提升使用者體驗和轉換率。'
 tags: ['GA4', '前端優化', '效能調校', '網站分析', 'SEO', 'Vue3', '網站開發']
-heroImage: 'ga4-frontend-optimization-cover.png'
+heroImage: '/ga4-frontend-optimization-cover.png'
+coverImage: '/ga4-frontend-optimization-cover.png'
 ---
 
 ## 🤔 前言：為什麼我的網站要最佳化？工程師的 OS
