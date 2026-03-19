@@ -1,4 +1,3 @@
-const contentModules = new Map([
-["src/content/blog/using-mdx.mdx", () => import('./using-mdx.js')]]);
+const contentModules = new Map();
 
 export { contentModules as default };

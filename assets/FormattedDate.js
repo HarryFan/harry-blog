@@ -1,9 +1,21 @@
-import { c as createComponent, m as maybeRenderHead, b as addAttribute, r as renderComponent, a as renderTemplate, e as createAstro } from './astro/server.js';
+import { e as createAstro, c as createComponent, m as maybeRenderHead, b as addAttribute, s as spreadAttributes, f as renderSlot, a as renderTemplate, r as renderComponent } from './astro/server.js';
 import 'kleur/colors';
-import { $ as $$HeaderLink } from './HeaderLink.js';
-import { a as SITE_TITLE } from './consts.js';
 /* empty css               */
 import 'clsx';
+import { a as SITE_TITLE } from './consts.js';
+
+const $$Astro$1 = createAstro("https://harryfan.github.io");
+const $$HeaderLink = createComponent(($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$1, $$props, $$slots);
+  Astro2.self = $$HeaderLink;
+  const { href, class: className, ...props } = Astro2.props;
+  const rawHref = typeof href === "string" ? href : href?.toString() ?? "/";
+  const pathname = Astro2.url.pathname.replace("/harry-blog/", "");
+  const subpath = pathname.match(/[^\/]+/g);
+  const isActive = rawHref === pathname || rawHref === "/" + (subpath?.[0] || "");
+  const resolvedHref = rawHref.startsWith("/") ? `${"/harry-blog/"}${rawHref.slice(1)}` : rawHref;
+  return renderTemplate`${maybeRenderHead()}<a${addAttribute(resolvedHref, "href")}${addAttribute([className, { active: isActive }], "class:list")}${spreadAttributes(props)} data-astro-cid-eimmu3lg> ${renderSlot($$result, $$slots["default"])} </a> `;
+}, "/home/runner/work/harry-blog/harry-blog/src/components/HeaderLink.astro", void 0);
 
 const $$Header = createComponent(($$result, $$props, $$slots) => {
   return renderTemplate`${maybeRenderHead()}<header data-astro-cid-3ef6ksr2> <nav data-astro-cid-3ef6ksr2> <h2 data-astro-cid-3ef6ksr2><a${addAttribute(`${"/harry-blog/"}blog/`, "href")} data-astro-cid-3ef6ksr2>${SITE_TITLE}</a></h2> <div class="internal-links" data-astro-cid-3ef6ksr2> ${renderComponent($$result, "HeaderLink", $$HeaderLink, { "href": "/blog/", "data-astro-cid-3ef6ksr2": true }, { "default": ($$result2) => renderTemplate`Blog` })} ${renderComponent($$result, "HeaderLink", $$HeaderLink, { "href": "/about/", "data-astro-cid-3ef6ksr2": true }, { "default": ($$result2) => renderTemplate`About` })} </div> <div class="social-links" data-astro-cid-3ef6ksr2> ${renderComponent($$result, "HeaderLink", $$HeaderLink, { "href": "/resume/", "data-astro-cid-3ef6ksr2": true }, { "default": ($$result2) => renderTemplate`履歷` })} </div> </nav> </header> `;
