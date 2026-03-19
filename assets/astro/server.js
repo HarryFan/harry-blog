@@ -2072,6 +2072,23 @@ function prerenderElementChildren(tag, children) {
   }
 }
 
+async function renderScript(result, id) {
+  if (result._metadata.renderedScripts.has(id)) return;
+  result._metadata.renderedScripts.add(id);
+  const inlined = result.inlinedScripts.get(id);
+  if (inlined != null) {
+    if (inlined) {
+      return markHTMLString(`<script type="module">${inlined}</script>`);
+    } else {
+      return "";
+    }
+  }
+  const resolved = await result.resolve(id);
+  return markHTMLString(
+    `<script type="module" src="${result.userAssetsBase ? (result.base === "/" ? "" : result.base) + result.userAssetsBase : ""}${resolved}"></script>`
+  );
+}
+
 function renderScriptElement({ props, children }) {
   return renderElement$1("script", {
     props,
@@ -2185,4 +2202,4 @@ function createVNode(type, props) {
   return vnode;
 }
 
-export { AstroError as A, ExperimentalFontsNotEnabled as B, FontFamilyNotFound as C, MissingSharp as D, ExpectedImage as E, FailedToFetchRemoteImageDimensions as F, Fragment as G, IncompatibleDescriptorOptions as I, LocalImageUsedWrongly as L, MissingImageDimension as M, NOOP_MIDDLEWARE_HEADER as N, RenderUndefinedEntryError as R, UnknownContentCollectionError as U, __astro_tag_component__ as _, renderTemplate as a, renderHead as b, createComponent as c, addAttribute as d, createAstro as e, renderSlot as f, renderUniqueStylesheet as g, renderScriptElement as h, createHeadAndContent as i, renderJSX as j, createVNode as k, AstroJSX as l, maybeRenderHead as m, AstroUserError as n, decodeKey as o, UnsupportedImageFormat as p, UnsupportedImageConversion as q, renderComponent as r, NoImageMetadata as s, toStyleString as t, unescapeHTML as u, ExpectedImageOptions as v, ExpectedNotESMImage as w, InvalidImageService as x, ImageMissingAlt as y, spreadAttributes as z };
+export { AstroError as A, spreadAttributes as B, ExperimentalFontsNotEnabled as C, FontFamilyNotFound as D, ExpectedImage as E, FailedToFetchRemoteImageDimensions as F, MissingSharp as G, Fragment as H, IncompatibleDescriptorOptions as I, LocalImageUsedWrongly as L, MissingImageDimension as M, NOOP_MIDDLEWARE_HEADER as N, RenderUndefinedEntryError as R, UnknownContentCollectionError as U, __astro_tag_component__ as _, renderTemplate as a, addAttribute as b, createComponent as c, renderHead as d, createAstro as e, renderSlot as f, renderUniqueStylesheet as g, renderScriptElement as h, createHeadAndContent as i, renderScript as j, renderJSX as k, createVNode as l, maybeRenderHead as m, AstroJSX as n, AstroUserError as o, decodeKey as p, UnsupportedImageFormat as q, renderComponent as r, UnsupportedImageConversion as s, toStyleString as t, unescapeHTML as u, NoImageMetadata as v, ExpectedImageOptions as w, ExpectedNotESMImage as x, InvalidImageService as y, ImageMissingAlt as z };

@@ -1,4 +1,4 @@
-import { k as createVNode, G as Fragment, _ as __astro_tag_component__ } from './astro/server.js';
+import { l as createVNode, H as Fragment, _ as __astro_tag_component__ } from './astro/server.js';
 import { $ as $$HeaderLink } from './HeaderLink.js';
 import 'clsx';
 

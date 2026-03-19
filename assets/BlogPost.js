@@ -1,10 +1,10 @@
-import { e as createAstro, c as createComponent, r as renderComponent, b as renderHead, d as addAttribute, f as renderSlot, a as renderTemplate } from './astro/server.js';
+import { e as createAstro, c as createComponent, r as renderComponent, d as renderHead, b as addAttribute, f as renderSlot, a as renderTemplate } from './astro/server.js';
 import 'kleur/colors';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { $ as $$BaseHead, a as $$Header, b as $$Footer } from './Footer.js';
-import { $ as $$FormattedDate } from './FormattedDate.js';
+import { $ as $$BaseHead } from './BaseHead.js';
+import { $ as $$Header, a as $$FormattedDate, b as $$Footer } from './FormattedDate.js';
 /* empty css               */
 
 const $$Astro = createAstro("https://harryfan.github.io");
