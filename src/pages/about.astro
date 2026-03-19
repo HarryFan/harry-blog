@@ -3,60 +3,151 @@ import Layout from '../layouts/BlogPost.astro';
 ---
 
 <Layout
-	title="About Me"
-	description="Lorem ipsum dolor sit amet"
-	pubDate={new Date('August 08 2021')}
+	title="About"
+	description="前端工程師 Harry：設計與前端整合、MVP 快速落地、效能優化。"
+	pubDate={new Date('2026-03-19')}
 	heroImage="/blog-placeholder-about.jpg"
 >
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-		labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo
-		viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam
-		adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus
-		et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus
-		vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque
-		sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
-	</p>
+	<section class="about-hero">
+		<p class="about-kicker">About</p>
+		<h2 class="about-name">Harry（前端工程師）</h2>
+		<p class="about-lede">
+			過去我們在多個專案中，從 0 到 1 一起完成產品落地，具備設計與前端高度整合的實務經驗，也擅長在 MVP
+			階段快速建立可驗證的產品版本。
+		</p>
+	</section>
 
-	<p>
-		Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non
-		tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non
-		blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna
-		porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis
-		massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc.
-		Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis
-		bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra
-		massa massa ultricies mi.
-	</p>
+	<section class="about-grid">
+		<div>
+			<h2>我擅長的事情</h2>
+			<ul class="about-list">
+				<li>13 年前端開發經驗</li>
+				<li>熟悉 Vue / Nuxt.js、React / Next.js 架構</li>
+				<li>擅長 SSR、RWD 與效能優化</li>
+				<li>具備系統整合與接案實務經驗</li>
+			</ul>
+		</div>
 
-	<p>
-		Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl
-		suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet
-		nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae
-		turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem
-		dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat
-		semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus
-		vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum
-		facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam
-		vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla
-		urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
-	</p>
+		<div>
+			<h2>連結</h2>
+			<ul class="about-links">
+				<li>
+					<a href={`${import.meta.env.BASE_URL}resume/`}>技術履歷</a>
+				</li>
+				<li class="about-podcast">
+					<figure class="about-cover">
+						<img
+							src="https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/af/91/5c/af915c86-761e-d762-afd2-35ddba87a5a2/mza_11340146304140465011.jpg/600x600bb.jpg"
+							alt="妖你聽新聞 Podcast 封面"
+							width="112"
+							height="112"
+							loading="lazy"
+							decoding="async"
+						/>
+						<figcaption>Podcast 封面</figcaption>
+					</figure>
+					<a
+						href="https://podcasts.apple.com/tw/podcast/%E5%A6%96%E4%BD%A0%E8%81%BD%E6%96%B0%E8%81%9E/id1836788949"
+						target="_blank"
+						rel="noreferrer"
+					>
+						妖你聽新聞（Apple Podcasts）
+					</a>
+				</li>
+			</ul>
+		</div>
+	</section>
 
-	<p>
-		Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper
-		viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc
-		scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur
-		gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus
-		pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim
-		blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id
-		cursus metus aliquam eleifend mi.
-	</p>
+	<section class="about-human">
+		<h2>另一面：人文關懷</h2>
+		<p>
+			除了技術，我也做 Podcast《妖你聽新聞》。它不是我的主打作品，而是我把人文關懷、社會觀察與幽默感放進生活的出口。
+			在這個什麼都能被美化、消音、漂白的年代，我們用更直白的方式，聊那些被主流忽略、被扭曲、被搞笑到變形的時事。
+		</p>
+	</section>
 
-	<p>
-		Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta
-		nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam
-		tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci
-		ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar
-		proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
-	</p>
+	<style>
+		.about-hero {
+			padding-bottom: 1.1rem;
+			border-bottom: 1px solid rgb(var(--gray-light));
+			margin-bottom: 1.6rem;
+		}
+		.about-kicker {
+			margin: 0 0 0.75rem;
+			font-size: 0.95rem;
+			font-weight: 700;
+			color: rgb(var(--gray));
+		}
+		.about-name {
+			margin: 0;
+			font-size: clamp(1.65rem, 2.2vw, 2.05rem);
+			letter-spacing: -0.02em;
+		}
+		.about-lede {
+			margin: 0.9rem 0 0;
+			max-width: 68ch;
+		}
+		.about-grid {
+			display: grid;
+			grid-template-columns: 1.05fr 0.95fr;
+			gap: 2rem;
+			padding: 0.25rem 0 1.4rem;
+			border-bottom: 1px solid rgb(var(--gray-light));
+			margin-bottom: 1.6rem;
+		}
+		.about-list {
+			margin: 0.75rem 0 0;
+			padding-left: 1.15rem;
+		}
+		.about-links {
+			list-style: none;
+			margin: 0.75rem 0 0;
+			padding: 0;
+			display: grid;
+			gap: 0.8rem;
+		}
+		.about-links a {
+			color: rgb(var(--black));
+			text-decoration: none;
+			border-bottom: 1px solid rgba(var(--gray), 35%);
+		}
+		.about-links a:hover {
+			border-bottom-color: rgba(var(--gray), 65%);
+		}
+		.about-podcast {
+			display: grid;
+			grid-template-columns: auto 1fr;
+			column-gap: 1rem;
+			align-items: start;
+		}
+		.about-cover {
+			margin: 0;
+		}
+		.about-cover img {
+			border-radius: 10px;
+			border: 1px solid rgba(var(--gray), 22%);
+			width: 112px;
+			height: 112px;
+		}
+		.about-cover figcaption {
+			margin-top: 0.45rem;
+			font-size: 0.95rem;
+			color: rgb(var(--gray));
+		}
+		.about-human p {
+			max-width: 72ch;
+		}
+		@media (max-width: 720px) {
+			.about-grid {
+				grid-template-columns: 1fr;
+			}
+			.about-podcast {
+				grid-template-columns: 1fr;
+			}
+			.about-cover img {
+				width: 96px;
+				height: 96px;
+			}
+		}
+	</style>
 </Layout>

@@ -1,0 +1,167 @@
+---
+import Layout from '../layouts/BlogPost.astro';
+---
+
+<Layout
+	title="履歷"
+	description="前端工程師 Harry：13 年經驗，產品落地與效能優化。"
+	pubDate={new Date('2026-03-19')}
+	heroImage="/blog-placeholder-about.jpg"
+>
+	<section class="resume-hero">
+		<p class="resume-kicker">Frontend Engineer</p>
+		<h2 class="resume-name">Harry</h2>
+		<p class="resume-summary">
+			前端工程師，13 年開發經驗。習慣把需求拆成可驗證的最小版本，快速推進 MVP，並在迭代中穩定補齊架構、效能與維護性。
+		</p>
+	</section>
+
+	<section class="resume-grid">
+		<div>
+			<h2>擅長領域</h2>
+			<ul class="resume-list">
+				<li>Vue / Nuxt.js、React / Next.js 的產品型開發</li>
+				<li>SSR、RWD、效能優化與前端工程化</li>
+				<li>設計與前端整合：把設計決策落到可維護的 UI</li>
+				<li>系統整合與接案協作：在限制中完成可交付的成果</li>
+			</ul>
+		</div>
+		<div>
+			<h2>聯絡方式</h2>
+			<ul class="resume-contacts">
+				<li>
+					<span class="resume-contacts__label">Email</span>
+					<span class="resume-contacts__value">
+						<a href="mailto:harry750110@gmail.com">harry750110@gmail.com</a>
+					</span>
+				</li>
+				<li>
+					<span class="resume-contacts__label">Line</span>
+					<span class="resume-contacts__value">harryvan</span>
+				</li>
+				<li>
+					<span class="resume-contacts__label">Facebook</span>
+					<span class="resume-contacts__value">Harris Fan</span>
+				</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="resume-block">
+		<h2>輸出與作品</h2>
+		<ul class="resume-links">
+			<li>
+				<a href={`${import.meta.env.BASE_URL}blog/`}>Blog（技術筆記）</a>
+			</li>
+			<li>
+				<a
+					href="https://podcasts.apple.com/tw/podcast/%E5%A6%96%E4%BD%A0%E8%81%BD%E6%96%B0%E8%81%9E/id1836788949"
+					target="_blank"
+					rel="noreferrer"
+				>
+					Podcast《妖你聽新聞》（Apple Podcasts）
+				</a>
+			</li>
+		</ul>
+	</section>
+
+	<section class="resume-block">
+		<h2>附件</h2>
+		<p class="resume-muted">
+			需要更完整的檔案／作品集附件，放在這個資料夾（站內頁面以可閱讀為主、附件以原始檔為主）。
+		</p>
+		<p>
+			<a
+				href="https://drive.google.com/drive/folders/1R9Y6o3wxsuKGQ9Apyif0nuUccLHtDHHr"
+				target="_blank"
+				rel="noreferrer"
+			>
+				Google Drive（履歷附件）
+			</a>
+		</p>
+	</section>
+
+	<style>
+		.resume-hero {
+			padding-bottom: 1.1rem;
+			border-bottom: 1px solid rgb(var(--gray-light));
+			margin-bottom: 1.6rem;
+		}
+		.resume-kicker {
+			margin: 0 0 0.75rem;
+			font-size: 0.95rem;
+			font-weight: 700;
+			color: rgb(var(--gray));
+		}
+		.resume-name {
+			margin: 0;
+			font-size: clamp(1.65rem, 2.2vw, 2.05rem);
+			letter-spacing: -0.02em;
+		}
+		.resume-summary {
+			margin: 0.9rem 0 0;
+			max-width: 72ch;
+		}
+		.resume-grid {
+			display: grid;
+			grid-template-columns: 1.1fr 0.9fr;
+			gap: 2rem;
+			padding: 0.25rem 0 1.4rem;
+			border-bottom: 1px solid rgb(var(--gray-light));
+			margin-bottom: 1.6rem;
+		}
+		.resume-list {
+			margin: 0.75rem 0 0;
+			padding-left: 1.15rem;
+		}
+		.resume-contacts {
+			list-style: none;
+			margin: 0.75rem 0 0;
+			padding: 0;
+			display: grid;
+			gap: 0.7rem;
+		}
+		.resume-contacts li {
+			display: grid;
+			grid-template-columns: 4.5rem 1fr;
+			gap: 0.75rem;
+			align-items: baseline;
+		}
+		.resume-contacts__label {
+			font-size: 0.95rem;
+			color: rgb(var(--gray));
+		}
+		.resume-contacts__value {
+			font-weight: 700;
+			color: rgb(var(--black));
+			overflow-wrap: anywhere;
+		}
+		.resume-block {
+			margin: 1.6rem 0 0;
+		}
+		.resume-links {
+			list-style: none;
+			margin: 0.75rem 0 0;
+			padding: 0;
+			display: grid;
+			gap: 0.8rem;
+		}
+		.resume-links a {
+			color: rgb(var(--black));
+			text-decoration: none;
+			border-bottom: 1px solid rgba(var(--gray), 35%);
+		}
+		.resume-links a:hover {
+			border-bottom-color: rgba(var(--gray), 65%);
+		}
+		.resume-muted {
+			margin: 0.75rem 0 0.9rem;
+			color: rgb(var(--gray-dark));
+		}
+		@media (max-width: 720px) {
+			.resume-grid {
+				grid-template-columns: 1fr;
+			}
+		}
+	</style>
+</Layout>
