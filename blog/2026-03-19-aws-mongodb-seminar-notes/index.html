@@ -1,0 +1,131 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Astro Blog" href="https://harryfan.github.io/rss.xml"><meta name="generator" content="Astro v5.7.13"><!-- Font preloads --><link rel="preload" href="/harry-blog/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin><link rel="preload" href="/harry-blog/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin><!-- 開發環境的 base URL 處理 --><!-- Canonical URL --><link rel="canonical" href="https://harryfan.github.io/harry-blog/blog/2026-03-19-aws-mongodb-seminar-notes/"><!-- Primary Meta Tags --><title>當後端變成樂高：一個前端工程師在 AWS × MongoDB 研討會的現場筆記</title><meta name="title" content="當後端變成樂高：一個前端工程師在 AWS × MongoDB 研討會的現場筆記"><meta name="description" content="從規格驅動開發到容器化與向量搜尋：把「凌晨三點電話」變少的實戰做法。"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://harryfan.github.io/harry-blog/blog/2026-03-19-aws-mongodb-seminar-notes/"><meta property="og:title" content="當後端變成樂高：一個前端工程師在 AWS × MongoDB 研討會的現場筆記"><meta property="og:description" content="從規格驅動開發到容器化與向量搜尋：把「凌晨三點電話」變少的實戰做法。"><meta property="og:image" content="https://harryfan.github.io/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://harryfan.github.io/harry-blog/blog/2026-03-19-aws-mongodb-seminar-notes/"><meta property="twitter:title" content="當後端變成樂高：一個前端工程師在 AWS × MongoDB 研討會的現場筆記"><meta property="twitter:description" content="從規格驅動開發到容器化與向量搜尋：把「凌晨三點電話」變少的實戰做法。"><meta property="twitter:image" content="https://harryfan.github.io/blog-placeholder-1.jpg"><style>:root{--accent: #2337ff;--accent-dark: #000d8a;--black: 15, 18, 25;--gray: 96, 115, 159;--gray-light: 229, 233, 240;--gray-dark: 34, 41, 57;--gray-gradient: rgba(var(--gray-light), 50%), #fff;--box-shadow: 0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%), 0 16px 32px rgba(var(--gray), 33%)}@font-face{font-family:Atkinson;src:url(../fonts/atkinson-regular.woff) format("woff");font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:Atkinson;src:url(../fonts/atkinson-bold.woff) format("woff");font-weight:700;font-style:normal;font-display:swap}body{font-family:Atkinson,sans-serif;margin:0;padding:0;text-align:left;background:linear-gradient(var(--gray-gradient)) no-repeat;background-size:100% 600px;word-wrap:break-word;overflow-wrap:break-word;color:rgb(var(--gray-dark));font-size:20px;line-height:1.7}main{width:720px;max-width:calc(100% - 2em);margin:auto;padding:3em 1em}h1,h2,h3,h4,h5,h6{margin:0 0 .5rem;color:rgb(var(--black));line-height:1.2}h1{font-size:3.052em}h2{font-size:2.441em}h3{font-size:1.953em}h4{font-size:1.563em}h5{font-size:1.25em}strong,b{font-weight:700}a,a:hover{color:var(--accent)}p{margin-bottom:1em}.prose p{margin-bottom:2em}textarea{width:100%;font-size:16px}input{font-size:16px}table{width:100%}img{max-width:100%;height:auto;border-radius:8px}code{padding:2px 5px;background-color:rgb(var(--gray-light));border-radius:2px}pre{padding:1.5em;border-radius:8px}pre>code{all:unset}blockquote{border-left:4px solid var(--accent);padding:0 0 0 20px;margin:0;font-size:1.333em}hr{border:none;border-top:1px solid rgb(var(--gray-light))}@media (max-width: 720px){body{font-size:18px}main{padding:1em}}.sr-only{border:0;padding:0;margin:0;position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px 1px 1px 1px);clip:rect(1px,1px,1px,1px);clip-path:inset(50%);white-space:nowrap}header[data-astro-cid-3ef6ksr2]{margin:0;padding:0 1em;background:#fff;box-shadow:0 2px 8px rgba(var(--black),5%)}h2[data-astro-cid-3ef6ksr2]{margin:0;font-size:1em}h2[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2],h2[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2].active{text-decoration:none}nav[data-astro-cid-3ef6ksr2]{display:flex;align-items:center;justify-content:space-between}nav[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{padding:1em .5em;color:var(--black);border-bottom:4px solid transparent;text-decoration:none}nav[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2].active{text-decoration:none;border-bottom-color:var(--accent)}.social-links[data-astro-cid-3ef6ksr2],.social-links[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{display:flex}@media (max-width: 720px){.social-links[data-astro-cid-3ef6ksr2]{display:none}}footer[data-astro-cid-sz7xmlte]{padding:2em 1em 6em;background:linear-gradient(var(--gray-gradient)) no-repeat;color:rgb(var(--gray));text-align:center}.social-links[data-astro-cid-sz7xmlte]{display:flex;justify-content:center;gap:1em;margin-top:1em}.social-links[data-astro-cid-sz7xmlte] a[data-astro-cid-sz7xmlte]{text-decoration:none;color:rgb(var(--gray))}.social-links[data-astro-cid-sz7xmlte] a[data-astro-cid-sz7xmlte]:hover{color:rgb(var(--gray-dark))}
+a[data-astro-cid-eimmu3lg]{display:inline-block;text-decoration:none}a[data-astro-cid-eimmu3lg].active{font-weight:bolder;text-decoration:underline}
+main[data-astro-cid-bvzihdzo]{width:calc(100% - 2em);max-width:100%;margin:0}.hero-image[data-astro-cid-bvzihdzo]{width:100%}.hero-image[data-astro-cid-bvzihdzo] img[data-astro-cid-bvzihdzo]{display:block;margin:0 auto;border-radius:12px;box-shadow:var(--box-shadow)}.prose[data-astro-cid-bvzihdzo]{width:720px;max-width:calc(100% - 2em);margin:auto;padding:1em;color:rgb(var(--gray-dark))}.title[data-astro-cid-bvzihdzo]{margin-bottom:1em;padding:1em 0;text-align:center;line-height:1}.title[data-astro-cid-bvzihdzo] h1[data-astro-cid-bvzihdzo]{margin:0 0 .5em}.date[data-astro-cid-bvzihdzo]{margin-bottom:.5em;color:rgb(var(--gray))}.last-updated-on[data-astro-cid-bvzihdzo]{font-style:italic}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <nav data-astro-cid-3ef6ksr2> <h2 data-astro-cid-3ef6ksr2><a href="/harry-blog/" data-astro-cid-3ef6ksr2>Astro Blog</a></h2> <div class="internal-links" data-astro-cid-3ef6ksr2> <a href="/harry-blog/harry-blog/" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> Home </a>  <a href="blog/" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> Blog </a>  <a href="about/" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> About </a>  </div> <div class="social-links" data-astro-cid-3ef6ksr2> <a href="https://m.webtoo.ls/@astro" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Follow Astro on Mastodon</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a3.614 3.614 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522c0-.859.22-1.541.66-2.046.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764.442.505.661 1.187.661 2.046v4.203z" data-astro-cid-3ef6ksr2></path></svg> </a> <a href="https://twitter.com/astrodotbuild" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Follow Astro on Twitter</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" data-astro-cid-3ef6ksr2></path></svg> </a> <a href="https://github.com/withastro/astro" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Go to Astro's GitHub repo</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-3ef6ksr2></path></svg> </a> </div> </nav> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="hero-image" data-astro-cid-bvzihdzo> <img width="1020" height="510" src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%221440%22%20height%3D%22720%22%20viewBox%3D%220%200%201440%20720%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22hsl(223%2085%25%2055%25)%22%2F%3E%3Cstop%20offset%3D%220.55%22%20stop-color%3D%22hsl(340%2090%25%2050%25)%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl(25%2085%25%2060%25)%22%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20id%3D%22s%22%20x1%3D%220%22%20y1%3D%221%22%20x2%3D%221%22%20y2%3D%220%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22rgba(0%2C0%2C0%2C0.55)%22%2F%3E%3Cstop%20offset%3D%220.65%22%20stop-color%3D%22rgba(0%2C0%2C0%2C0)%22%2F%3E%3C%2FlinearGradient%3E%3Cpattern%20id%3D%22p%22%20width%3D%2218%22%20height%3D%2218%22%20patternUnits%3D%22userSpaceOnUse%22%20patternTransform%3D%22rotate(28)%22%3E%3Crect%20width%3D%2218%22%20height%3D%2218%22%20fill%3D%22none%22%2F%3E%3Cpath%20d%3D%22M0%209H18%22%20stroke%3D%22rgba(255%2C255%2C255%2C0.13)%22%20stroke-width%3D%222%22%2F%3E%3C%2Fpattern%3E%3C%2Fdefs%3E%3Crect%20width%3D%221440%22%20height%3D%22720%22%20fill%3D%22url(%23g)%22%2F%3E%3Crect%20width%3D%221440%22%20height%3D%22720%22%20fill%3D%22url(%23p)%22%20opacity%3D%220.75%22%2F%3E%3Crect%20width%3D%221440%22%20height%3D%22720%22%20fill%3D%22url(%23s)%22%2F%3E%3Cg%20opacity%3D%220.9%22%20fill%3D%22rgba(255%2C255%2C255%2C0.85)%22%20font-family%3D%22ui-sans-serif%2C%20system-ui%2C%20-apple-system%2C%20Segoe%20UI%2C%20Roboto%2C%20Helvetica%2C%20Arial%22%20font-weight%3D%22700%22%20letter-spacing%3D%220.28em%22%20font-size%3D%2222%22%3E%3Ctext%20x%3D%2272%22%20y%3D%2292%22%3EHARRY%20BLOG%3C%2Ftext%3E%3C%2Fg%3E%3Cg%20opacity%3D%220.75%22%20fill%3D%22rgba(255%2C255%2C255%2C0.9)%22%20font-family%3D%22ui-sans-serif%2C%20system-ui%2C%20-apple-system%2C%20Segoe%20UI%2C%20Roboto%2C%20Helvetica%2C%20Arial%22%20font-weight%3D%22800%22%20font-size%3D%2248%22%3E%3Ctext%20x%3D%2272%22%20y%3D%22660%22%3E%E7%95%B6%E5%BE%8C%E7%AB%AF%E8%AE%8A%E6%88%90%E6%A8%82%E9%AB%98%EF%BC%9A%E4%B8%80%E5%80%8B%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%AB%E5%9C%A8%20AWS%20%C3%97%20MongoDB%20%E7%A0%94%E8%A8%8E%E6%9C%83%E7%9A%84%E7%8F%BE%E5%A0%B4%E7%AD%86%E8%A8%98%3C%2Ftext%3E%3C%2Fg%3E%3Cg%20opacity%3D%220.65%22%20fill%3D%22rgba(255%2C255%2C255%2C0.75)%22%20font-family%3D%22ui-monospace%2C%20SFMono-Regular%2C%20Menlo%2C%20Monaco%2C%20Consolas%2C%20Liberation%20Mono%2C%20Courier%20New%2C%20monospace%22%20font-size%3D%2216%22%3E%3Ctext%20x%3D%2272%22%20y%3D%22138%22%3EHASH%3A87558997%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fsvg%3E" alt="" data-astro-cid-bvzihdzo> </div> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2026-03-19T00:00:00.000Z"> Mar 19, 2026 </time>  </div> <h1 data-astro-cid-bvzihdzo>當後端變成樂高：一個前端工程師在 AWS × MongoDB 研討會的現場筆記</h1> <hr data-astro-cid-bvzihdzo> </div>  <h1 id="當後端變成樂高一個前端工程師在-aws--mongodb-研討會的現場筆記">當後端變成樂高：一個前端工程師在 AWS × MongoDB 研討會的現場筆記</h1>
+<hr>
+<p>我不是遊戲開發者。</p>
+<p>但那天坐在 AWS 台北辦公室，聽完三位講者輪番上台，我有點震撼地發現——這場活動跟遊戲的關係，遠不如它跟「開發這件事本身」的關係來得深。</p>
+<p>裡面談的每一個痛點，我都在接案和職場裡反覆撞牆過：需求模糊得不像話、AI 輸出品質忽高忽低、凌晨三點伺服器突然爆炸、改個資料庫 Schema 就得停機一整晚。</p>
+<p>活動資訊： <a href="https://events.mongodb.com/taiwangamingseminarwithaws">https://events.mongodb.com/taiwangamingseminarwithaws</a> ，2025 年 3 月 6 日，AWS 台北辦公室。</p>
+<hr>
+<h2 id="第一場amazon-kiro--ai-終於成為開發夥伴而不只是打字機">第一場：Amazon Kiro — AI 終於成為開發「夥伴」，而不只是打字機</h2>
+<p>Irving Hsu（AWS Partner Solutions Architect）一開口就問了個讓全場苦笑的問題：「同樣的需求，今天問 AI 和昨天問 AI，結果一樣嗎？」</p>
+<p>沒人舉手。</p>
+<p>這正是他想講的核心。現在的 AI 開發工具，說白了就是個聰明的補全引擎——幫你寫段小程式、解釋一行報錯、建議一個修法。但整條開發流程呢？從計畫、設計、測試到上線，AI 真正參與的，其實只有中間那一小段。前後都是空白。</p>
+<p>Kiro 要填補的，就是那兩端的空白。</p>
+<h3 id="先把腦袋裡的話變成一份可以執行的文件">先把腦袋裡的話，變成一份可以執行的文件</h3>
+<p>Kiro 的核心叫 <strong>Spec-Driven Development（規格驅動開發）</strong>。</p>
+<p>邏輯很直白：別急著寫程式，先把你要做什麼說清楚。你用自然語言描述需求，Kiro 把這句話轉化成 <strong>ERS 格式的需求文件</strong>——不是散亂的條列清單，而是用「當什麼條件成立，系統就執行什麼動作」的語法逐條寫下去。需求確認後，它繼續往下生成系統架構圖、API 定義、資料庫欄位設計。最後把整個功能拆成一個個極細的 Task，像拆樂高一樣，一塊一塊依序執行。</p>
+<p>Irving 特別強調「拆細」這道工序。讓 AI 一口氣消化一個複雜功能，出來的結果往往面目全非；但把任務切得夠小、夠明確，每一步都可以驗收，整體品質就穩了。</p>
+<p>現場 Demo 裡，他隨口說了一句話描述某個管理系統，不到兩分鐘，Kiro 就端出完整的需求文件、系統設計、MongoDB 資料模型，連每個 Collection 該建哪些 Index 都想好了。那個密度，要是手寫的話，你得對著螢幕坐到天亮。</p>
+<h3 id="每次按下儲存背後都有人在把關">每次按下儲存，背後都有人在把關</h3>
+<p>另一個讓我記下來的功能叫 <strong>Agent Hooks</strong>，觸發條件非常日常：存檔、建立新檔、刪除檔案。就在這些再平凡不過的動作瞬間，Hooks 可以自動啟動你設定好的任務——跑測試、更新文件、掃描安全漏洞。</p>
+<p>Demo 裡，Irving 把一組密碼直接寫進程式碼，然後按儲存。幾秒後，Kiro 跳出紅字警告：第幾行，發現了高風險機密資訊，建議改用環境變數。</p>
+<p>他說了一句話我很有感：「我在 AWS 待了七年，還是偶爾會接到警報，說有人把 Key 推上公開 repo。不是不知道不能這樣做，是人就是會分神。Hooks 要解決的，就是這種人性弱點。」</p>
+<p>把規範寫進工具裡，永遠比寫進文件裡有效。</p>
+<h3 id="讓-ai-現學現賣你公司的規矩">讓 AI 現學現賣你公司的規矩</h3>
+<p>第三個功能叫 <strong>Stereotypes</strong>，說白了就是給 AI 設定行為規範。你告訴 Kiro 公司的編碼標準——用什麼框架、命名規則怎麼定、哪些 Library 禁止使用——它之後所有的回答都會在這個框架裡走，今天如此，明天也如此。</p>
+<p>一個十人開發團隊，十個人各自用 AI，最後程式碼風格亂成一鍋粥——這個場景太多人經歷過了。Stereotypes 要解決的就是這件事：讓 AI 從一個隨機回答的外包工具，變成真正懂公司規矩的開發成員。</p>
+<h3 id="設計稿丟進去程式碼走出來">設計稿丟進去，程式碼走出來</h3>
+<p>Kiro 還支援 <strong>MCP（Model Context Protocol）Server</strong> 整合，讓 AI 能直接跟外部系統對話——讀取 Figma 設計稿、查詢 AWS 文件、串接資料庫，都可以接進來。</p>
+<p>Demo 裡，Irving 把一個 Figma 頁面連結丟給 Kiro，請它根據設計稿生成需求文件，再一路產出可執行的程式碼。設計稿到代碼，中間幾乎沒有人工翻譯的環節。我就坐在台下，親眼看著這件事發生。</p>
+<p>投影片上也出現了 <strong>Amazon ECS and EKS managed MCP Servers</strong> 的架構圖，說明 Kiro 跟 AWS 容器服務之間的整合已經到位——開發工具和雲端基礎設施之間那條一直需要人工跨越的溝，正在被填平。</p>
+<hr>
+<h2 id="第二場aws-eks--把凌晨三點被電話吵醒這件事從你的人生刪掉">第二場：AWS EKS — 把「凌晨三點被電話吵醒」這件事，從你的人生刪掉</h2>
+<p>Danny Ho（AWS）上台，第一句話就讓現場氣氛鬆了：「你們有沒有試過，凌晨睡得正熟，電話響了，說伺服器掛了？」</p>
+<p>台下幾個人舉了手，然後是一片心有戚戚的笑聲。</p>
+<p>他接著說：「這就是遊戲後端工程師的日常。」</p>
+<p>遊戲流量的特性，跟大多數 Web 服務截然不同——它不是緩慢爬升的曲線，而是懸崖邊的垂直跳躍。賽季更新的那一刻、限時活動開搶的那一秒，流量可以在幾分鐘內飆到平時的 <strong>10 倍</strong>。玩家能接受的延遲極限大概是 <strong>100ms</strong>，超過這個數字，不是體驗變差，是投訴信件開始湧入。而公司對你的 SLA 承諾是全年 <strong>99.99%</strong> 可用性，換算下來，一整年最多只能停機不到一個小時。</p>
+<p>這三個數字壓在一起，就是遊戲後端工程師每晚輾轉反側的重量。</p>
+<h3 id="從一台大機器扛所有到各自獨立的小盒子">從「一台大機器扛所有」到「各自獨立的小盒子」</h3>
+<p>傳統架構有個根本矛盾：一台大機器上跑多個 Game Server Process。白天流量低的時候，大半資源閒著燒錢；晚上活動一來，機器又不夠用。更要命的是，一台機器掛掉，上面所有的 Process 一起陣亡——不是一個房間出問題，是這台機器上所有玩家同時被踢出去。</p>
+<p>容器化改變的是資源調度的邏輯。把每個服務打包成獨立的 Container，由 Kubernetes 統一排程，需要就開、不需要就停，某個 Container 壞了也不會拖垮整個系統。EKS 把這套機制搬上 AWS，同時把維運的複雜度大幅壓低。</p>
+<h3 id="幾秒鐘從零到能用的節點">幾秒鐘，從零到能用的節點</h3>
+<p>自動擴展工具有一堆，但 Danny 特別點名了 <strong>Karpenter</strong>。傳統的 Cluster Autoscaler 走的是間接路徑：偵測到 Pod 排隊 → 通知 Auto Scaling Group → 等 EC2 節點慢慢起來，整個過程動輒一分鐘以上。Karpenter 直接跳過中間層，對 EC2 的 Fleet API 下指令，實測幾秒內節點就緒。</p>
+<p>對遊戲來說這個差距不是技術數字，而是開賽瞬間玩家是否能順利進場——一分鐘的等待，足以讓一批玩家關掉遊戲然後去 PTT 發文。</p>
+<h3 id="流量走的路比你想的更重要">流量走的路，比你想的更重要</h3>
+<p>Danny 投影片上有張對比圖很清楚：傳統 Instance Mode（紫色路徑）要在好幾個節點之間跳來跳去才能找到目標；IP Mode（綠色路徑）直接打到 Pod IP，一條線到底。他建議遊戲場景用 <strong>NLB 搭配 IP Mode</strong>，跳過所有不必要的轉發層。</p>
+<p>對 FPS 或格鬥遊戲這種「每毫秒都有意義」的場景，這段路程省掉幾個跳轉，玩家的手感真的感受得出來。</p>
+<h3 id="大活動前提前把門打開">大活動前，提前把門打開</h3>
+<p><strong>EKS Control Plane 預備制</strong>聽起來是個很小的功能，但解決的是一個非常現實的問題。Control Plane 本身接受請求有容量上限，如果大型活動在晚上九點開始，工程師可以下午三點先把容量升上去，活動結束再降回來。</p>
+<p>與其在流量炸進來的瞬間才手忙腳亂，不如提前三個小時把基礎設施備好。這個邏輯就像演唱會開場前先把所有通道打開，而不是等觀眾擠在門口才開始拆圍欄。</p>
+<hr>
+<h2 id="第三場mongodb-atlas--資料庫第一次讓我覺得這不是後端禁地">第三場：MongoDB Atlas — 資料庫第一次讓我覺得「這不是後端禁地」</h2>
+<p>Aloysius Chang（MongoDB Senior Partner Solutions Architect）一開口就問：「有沒有人做過凌晨兩點四點八點輪班，等資料庫遷移完成的？」</p>
+<p>台下幾個人舉手，不是全部，但足夠讓全場會意地笑出來。</p>
+<p>他說：「這就是我們要消滅的事。」</p>
+<p>投影片上有一句話讓我眼睛亮了一下：「MongoDB，最像 RDBMS 的資料庫。」這不是說它要取代你熟悉的一切，而是說——你已經懂的那套思維，在這裡還能用，只是現在多了更大的彈性空間。</p>
+<h3 id="json-格式前端的母語就是資料庫的語言">JSON 格式，前端的母語就是資料庫的語言</h3>
+<p>MongoDB 的核心是 JSON-like 的文件模型。對前端來說，這幾乎是零學習成本——API 回來的資料長什麼樣，存進資料庫就長什麼樣。不需要把物件打散成一堆關聯表，查詢時也不需要費力把它們 JOIN 回來。</p>
+<p>就像你一直用中文思考，突然有人說：「來，我們就用中文開會，不用翻譯了。」</p>
+<p>彈性更是關鍵。遊戲版本更新、新增角色屬性、調整道具結構——這些在傳統資料庫裡都是「先停機、改 Schema、再上線」的儀式，輕則半小時，重則整晚。MongoDB 的動態 Schema 讓修改可以在線上悄悄進行，玩家毫無感知。</p>
+<h3 id="水平擴展對應用程式來說完全透明">水平擴展，對應用程式來說完全透明</h3>
+<p>資料量超出單台機器的上限怎麼辦？MongoDB 的 <strong>Sharding（分片）</strong> 會自動把資料分散到多台機器，但對外永遠呈現成一個完整的資料庫。</p>
+<p>你的 API 不用改，查詢語法不用改，承載量卻能跟著分片數量線性成長。</p>
+<p>Aloysius 提到對岸某個大型電商「分表分庫」的案例，那張截圖在技術社群裡流傳已久。見過的人都知道那段代碼的重量——應用層要自己算資料在哪個表，每次修改牽一髮而動全身。「當你的應用程式不需要改，省下的不只是時間，」他說，「是工程師的精神健康。」</p>
+<h3 id="三個讓人坐直的數字">三個讓人坐直的數字</h3>
+<p>高併發的壓力，Aloysius 用三個數字說清楚了：<strong>10 倍</strong>瞬間流量、<strong>100ms</strong> 玩家忍耐極限、<strong>99.99% SLA</strong> 全年停機不超過一小時。MongoDB Atlas 針對這三個指標，都有對應的架構設計來承接。</p>
+<h3 id="導入之後數字說話">導入之後，數字說話</h3>
+<p>「導入 MongoDB Atlas 的成果」那張投影片，每個數字都很具體：<strong>63%</strong> 年度成本下降、<strong>82%</strong> 效能提升、維運人力壓縮到 <strong>1–2 人</strong>、開發工作量減少 <strong>70%</strong>、部署時間縮短 <strong>78%</strong>。這不是 Demo 環境跑出來的數字，是客戶真實回報的結果。</p>
+<h3 id="square-enix一個人全球規模">Square Enix：一個人，全球規模</h3>
+<p>整場讓我最震驚的，是 Square Enix 那張投影片。節省約 <strong>$1M</strong> 硬體與維運成本、查詢時間從數月壓縮到 <strong>2 分鐘</strong>、每天處理 <strong>0.5TB</strong> 遊戲資料。</p>
+<p>但最後那行才是讓全場靜了一秒的數字：整個資料層，只需要 <strong>1 個人</strong>維運。</p>
+<p>一個人，全球規模的遊戲資料工作。Aloysius 說：「這就是為什麼 MongoDB Atlas 不只是資料庫，而是讓小團隊能打大仗的基礎建設。」</p>
+<hr>
+<h2 id="第四場向量搜尋--voyage-ai--當搜尋引擎開始理解你想說什麼">第四場：向量搜尋 × Voyage AI — 當搜尋引擎開始理解你「想說什麼」</h2>
+<p>最後這段還是 Aloysius，但整個氛圍轉了——從架構討論，變成更接近產品思維的對話。</p>
+<p>他問了一個問題，簡單到讓人愣了一下才反應過來：「玩家搜尋『怎麼取得高品質武器』，你的系統能找到『傳說級裝備』嗎？」</p>
+<p>傳統關鍵字搜尋：不能。這兩組字沒有任何重疊。</p>
+<p>向量搜尋：可以。因為它比的不是字，是意思。</p>
+<h3 id="語意才是搜尋的真正維度">語意，才是搜尋的真正維度</h3>
+<p>把所有文字放進一個巨大的空間，語意相近的詞自然靠攏在一起，語意相遠的詞距離遙遠。「傳說級裝備」和「高品質武器」在這個空間裡是鄰居，「傳說級裝備」和「釣魚竿」則住在城市的兩端。</p>
+<p>搜尋時，不再問「有沒有這個字」，而是問「這個概念的鄰居是誰」。一個問法的轉換，讓搜尋從「字面匹配」升維到「理解意圖」。</p>
+<h3 id="為什麼是-voyage-ai">為什麼是 Voyage AI？</h3>
+<p>業界基準測試排名第一、原生支援中英日多語言混搜（不需要對照表、不需要翻譯層）、低幻覺特性讓 NPC 對話更可靠。</p>
+<p>但對我來說最實際的一點是：Voyage AI 已經整合進 MongoDB Atlas 平台，不需要另外申請 API 金鑰，不需要管理第三方服務。少一個外部依賴，就少一個可能在凌晨三點炸掉的環節。</p>
+<h3 id="先撒一張大網再用細篩把雜質濾掉">先撒一張大網，再用細篩把雜質濾掉</h3>
+<p>向量搜尋有個盲點：它只判斷「語意接近」，不判斷「是不是真的在回答這個問題」。有時候兩份文件在語意空間裡靠得很近，但一份真正切題，另一份只是恰好用了相似的詞。</p>
+<p><strong>Reranker（重排序模型）</strong> 解決的就是這件事。它在向量搜尋撈出候選名單之後，把「問題」和每一份候選文件放在一起重新評分——不是分開計算，而是同框比對。這種「放在一起看」的能力，讓 AI 不只知道文件跟問題語意接近，還能判斷它是否真的回答了這個問題。兩段式架構，精準度大幅提升，答非所問的機率也跟著降下來。</p>
+<h3 id="四個場景四種不同的產品突破">四個場景，四種不同的產品突破</h3>
+<p><strong>玩家個人化推薦</strong>：把遊玩時間、角色選擇、消費紀錄轉成自然語言，向量化成一個「代表這位玩家喜好」的數字向量，找最接近的內容推薦。捕捉的不只是明顯的偏好，還有那些玩家自己可能說不清楚的隱性喜好。留存率提升 <strong>20–35%</strong>。</p>
+<p><strong>智慧 NPC 對話（RAG 架構）</strong>：NPC 只能從遊戲世界觀文件裡取材回答，不准自由發揮——這條限制是防止 AI 信口開河的防線。搭配快取機制，大量重複性問題直接從快取拿答案，查詢延遲從 <strong>500ms 壓縮到 50ms</strong>，<strong>99% 玩家</strong>認可對話品質。</p>
+<p><strong>遊戲內容語意搜尋</strong>：「釣魚竿」找得到「高品質漁具」，「高品質武器」找得到「傳說級裝備」。搜尋引擎第一次開始理解玩家想找什麼，而不只是找玩家輸入了什麼。</p>
+<p><strong>玩家配對</strong>：不只看等級和勝率，把戰鬥風格、活躍時段、溝通習慣都納入配對邏輯，組出真正有默契的隊伍，而不只是數值相近的陌生人。</p>
+<h3 id="一個資料庫什麼都放得下">一個資料庫，什麼都放得下</h3>
+<p>向量搜尋的資料和應用程式的資料，存在<strong>同一個 MongoDB 資料庫</strong>裡。不需要另外架向量資料庫，不需要維護兩套同步機制。一次寫入，兩種能力都有。架構越簡單，出問題的地方就越少。</p>
+<hr>
+<p>來源：<a href="https://www.notion.so/AWS-MongoDB-31c48a1740bf80098849fd6204e7bf50">https://www.notion.so/AWS-MongoDB-31c48a1740bf80098849fd6204e7bf50</a></p>
+<h2 id="aws從程式片段到流程自動化">AWS：從「程式片段」到「流程自動化」</h2>
+<ul>
+<li>Kiro 的 Spec‑Driven Development：自然語言 → ERS 需求 → 架構/DB/Index → 任務極細拆解</li>
+<li>Agent Hooks：在「存檔、建檔、刪檔」瞬間自動跑測試、掃敏感資訊、更新文件</li>
+<li>Stereotypes：把公司編碼規範變成 AI 的行為邊界，團隊輸出一致</li>
+<li>MCP Servers 與 Figma→Code 串接，縮短設計到代碼的翻譯鏈</li>
+</ul>
+<h2 id="eks-for-games用-karpenter-把等一分鐘變成等幾秒">EKS for Games：用 Karpenter 把「等一分鐘」變成「等幾秒」</h2>
+<ul>
+<li>遊戲流量不是曲線，是懸崖；Karpenter 直接對 EC2 Fleet 起節點，幾秒 ready</li>
+<li>NLB + IP Mode 減少轉發；EKS Control Plane 預備制，在活動前先把門打開</li>
+</ul>
+<h2 id="mongodb-atlas最像-rdbms-的文件資料庫">MongoDB Atlas：最像 RDBMS 的文件資料庫</h2>
+<ul>
+<li>動態 Schema 線上調整、Sharding 線性擴展；應用端不必改</li>
+<li>成果數字：成本降 63%、效能升 82%、DBA 工時大幅降低</li>
+<li>Square Enix：查詢從數月縮到 2 分鐘、節省約 100 萬美金；一人維運全球資料層</li>
+</ul>
+<h2 id="向量搜尋與-rag從字到意圖">向量搜尋與 RAG：從「字」到「意圖」</h2>
+<ul>
+<li>Voyage AI Embeddings + Reranker：語意找鄰居，再同框評分，降低答非所問</li>
+<li>應用：玩家個人化推薦、智慧 NPC 對話、內容語意搜尋、玩家配對</li>
+<li>一次寫入，同庫服務：應用資料與向量資料同在 MongoDB，架構更單純</li>
+</ul>
+<h2 id="我的三個下一步">我的三個下一步</h2>
+<ul>
+<li>試行 ERS 規格文件 → 自動拆任務</li>
+<li>Atlas Vector Search 試升級既有關鍵字搜尋</li>
+<li>在團隊裡以「架構建議者」角度推動自動化與可觀測</li>
+</ul>
+<hr>
+<p>來源：<a href="https://www.notion.so/AWS-MongoDB-31c48a1740bf80098849fd6204e7bf50?source=copy_link">https://www.notion.so/AWS-MongoDB-31c48a1740bf80098849fd6204e7bf50?source=copy_link</a></p>  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2026 Your name here. All rights reserved.
+<div class="social-links" data-astro-cid-sz7xmlte> <a href="https://m.webtoo.ls/@astro" target="_blank" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Follow Astro on Mastodon</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" astro-icon="social/mastodon" data-astro-cid-sz7xmlte><path fill="currentColor" d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a3.614 3.614 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522c0-.859.22-1.541.66-2.046.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764.442.505.661 1.187.661 2.046v4.203z" data-astro-cid-sz7xmlte></path></svg> </a> <a href="https://twitter.com/astrodotbuild" target="_blank" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Follow Astro on Twitter</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" astro-icon="social/twitter" data-astro-cid-sz7xmlte><path fill="currentColor" d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" data-astro-cid-sz7xmlte></path></svg> </a> <a href="https://github.com/withastro/astro" target="_blank" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Go to Astro's GitHub repo</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" astro-icon="social/github" data-astro-cid-sz7xmlte><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-sz7xmlte></path></svg> </a> </div> </footer>  </body></html>

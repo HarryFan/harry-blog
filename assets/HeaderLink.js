@@ -13,6 +13,6 @@ const $$HeaderLink = createComponent(($$result, $$props, $$slots) => {
   const isActive = rawHref === pathname || rawHref === "/" + (subpath?.[0] || "");
   const resolvedHref = rawHref.startsWith("/") ? `${"/harry-blog/"}${rawHref.slice(1)}` : rawHref;
   return renderTemplate`${maybeRenderHead()}<a${addAttribute(resolvedHref, "href")}${addAttribute([className, { active: isActive }], "class:list")}${spreadAttributes(props)} data-astro-cid-eimmu3lg> ${renderSlot($$result, $$slots["default"])} </a> `;
-}, "/Users/harry/Documents/Astro/harry-blog/src/components/HeaderLink.astro", void 0);
+}, "/home/runner/work/harry-blog/harry-blog/src/components/HeaderLink.astro", void 0);
 
 export { $$HeaderLink as $ };

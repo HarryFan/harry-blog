@@ -1,0 +1,293 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Astro Blog" href="https://harryfan.github.io/rss.xml"><meta name="generator" content="Astro v5.7.13"><!-- Font preloads --><link rel="preload" href="/harry-blog/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin><link rel="preload" href="/harry-blog/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin><!-- 開發環境的 base URL 處理 --><!-- Canonical URL --><link rel="canonical" href="https://harryfan.github.io/harry-blog/blog/2026-03-19-claude-md-collaboration/"><!-- Primary Meta Tags --><title>把協作當成系統設計：我們的 CLAUDE.md 與最小改動原則</title><meta name="title" content="把協作當成系統設計：我們的 CLAUDE.md 與最小改動原則"><meta name="description" content="重來一次比寫程式更耗力。用 CLAUDE.md 把規則寫到專案根目錄，讓人與 AI 都在同一套框架下協作。"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://harryfan.github.io/harry-blog/blog/2026-03-19-claude-md-collaboration/"><meta property="og:title" content="把協作當成系統設計：我們的 CLAUDE.md 與最小改動原則"><meta property="og:description" content="重來一次比寫程式更耗力。用 CLAUDE.md 把規則寫到專案根目錄，讓人與 AI 都在同一套框架下協作。"><meta property="og:image" content="https://harryfan.github.io/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://harryfan.github.io/harry-blog/blog/2026-03-19-claude-md-collaboration/"><meta property="twitter:title" content="把協作當成系統設計：我們的 CLAUDE.md 與最小改動原則"><meta property="twitter:description" content="重來一次比寫程式更耗力。用 CLAUDE.md 把規則寫到專案根目錄，讓人與 AI 都在同一套框架下協作。"><meta property="twitter:image" content="https://harryfan.github.io/blog-placeholder-1.jpg"><style>:root{--accent: #2337ff;--accent-dark: #000d8a;--black: 15, 18, 25;--gray: 96, 115, 159;--gray-light: 229, 233, 240;--gray-dark: 34, 41, 57;--gray-gradient: rgba(var(--gray-light), 50%), #fff;--box-shadow: 0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%), 0 16px 32px rgba(var(--gray), 33%)}@font-face{font-family:Atkinson;src:url(../fonts/atkinson-regular.woff) format("woff");font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:Atkinson;src:url(../fonts/atkinson-bold.woff) format("woff");font-weight:700;font-style:normal;font-display:swap}body{font-family:Atkinson,sans-serif;margin:0;padding:0;text-align:left;background:linear-gradient(var(--gray-gradient)) no-repeat;background-size:100% 600px;word-wrap:break-word;overflow-wrap:break-word;color:rgb(var(--gray-dark));font-size:20px;line-height:1.7}main{width:720px;max-width:calc(100% - 2em);margin:auto;padding:3em 1em}h1,h2,h3,h4,h5,h6{margin:0 0 .5rem;color:rgb(var(--black));line-height:1.2}h1{font-size:3.052em}h2{font-size:2.441em}h3{font-size:1.953em}h4{font-size:1.563em}h5{font-size:1.25em}strong,b{font-weight:700}a,a:hover{color:var(--accent)}p{margin-bottom:1em}.prose p{margin-bottom:2em}textarea{width:100%;font-size:16px}input{font-size:16px}table{width:100%}img{max-width:100%;height:auto;border-radius:8px}code{padding:2px 5px;background-color:rgb(var(--gray-light));border-radius:2px}pre{padding:1.5em;border-radius:8px}pre>code{all:unset}blockquote{border-left:4px solid var(--accent);padding:0 0 0 20px;margin:0;font-size:1.333em}hr{border:none;border-top:1px solid rgb(var(--gray-light))}@media (max-width: 720px){body{font-size:18px}main{padding:1em}}.sr-only{border:0;padding:0;margin:0;position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px 1px 1px 1px);clip:rect(1px,1px,1px,1px);clip-path:inset(50%);white-space:nowrap}header[data-astro-cid-3ef6ksr2]{margin:0;padding:0 1em;background:#fff;box-shadow:0 2px 8px rgba(var(--black),5%)}h2[data-astro-cid-3ef6ksr2]{margin:0;font-size:1em}h2[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2],h2[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2].active{text-decoration:none}nav[data-astro-cid-3ef6ksr2]{display:flex;align-items:center;justify-content:space-between}nav[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{padding:1em .5em;color:var(--black);border-bottom:4px solid transparent;text-decoration:none}nav[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2].active{text-decoration:none;border-bottom-color:var(--accent)}.social-links[data-astro-cid-3ef6ksr2],.social-links[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{display:flex}@media (max-width: 720px){.social-links[data-astro-cid-3ef6ksr2]{display:none}}footer[data-astro-cid-sz7xmlte]{padding:2em 1em 6em;background:linear-gradient(var(--gray-gradient)) no-repeat;color:rgb(var(--gray));text-align:center}.social-links[data-astro-cid-sz7xmlte]{display:flex;justify-content:center;gap:1em;margin-top:1em}.social-links[data-astro-cid-sz7xmlte] a[data-astro-cid-sz7xmlte]{text-decoration:none;color:rgb(var(--gray))}.social-links[data-astro-cid-sz7xmlte] a[data-astro-cid-sz7xmlte]:hover{color:rgb(var(--gray-dark))}
+a[data-astro-cid-eimmu3lg]{display:inline-block;text-decoration:none}a[data-astro-cid-eimmu3lg].active{font-weight:bolder;text-decoration:underline}
+main[data-astro-cid-bvzihdzo]{width:calc(100% - 2em);max-width:100%;margin:0}.hero-image[data-astro-cid-bvzihdzo]{width:100%}.hero-image[data-astro-cid-bvzihdzo] img[data-astro-cid-bvzihdzo]{display:block;margin:0 auto;border-radius:12px;box-shadow:var(--box-shadow)}.prose[data-astro-cid-bvzihdzo]{width:720px;max-width:calc(100% - 2em);margin:auto;padding:1em;color:rgb(var(--gray-dark))}.title[data-astro-cid-bvzihdzo]{margin-bottom:1em;padding:1em 0;text-align:center;line-height:1}.title[data-astro-cid-bvzihdzo] h1[data-astro-cid-bvzihdzo]{margin:0 0 .5em}.date[data-astro-cid-bvzihdzo]{margin-bottom:.5em;color:rgb(var(--gray))}.last-updated-on[data-astro-cid-bvzihdzo]{font-style:italic}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <nav data-astro-cid-3ef6ksr2> <h2 data-astro-cid-3ef6ksr2><a href="/harry-blog/" data-astro-cid-3ef6ksr2>Astro Blog</a></h2> <div class="internal-links" data-astro-cid-3ef6ksr2> <a href="/harry-blog/harry-blog/" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> Home </a>  <a href="blog/" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> Blog </a>  <a href="about/" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> About </a>  </div> <div class="social-links" data-astro-cid-3ef6ksr2> <a href="https://m.webtoo.ls/@astro" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Follow Astro on Mastodon</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a3.614 3.614 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522c0-.859.22-1.541.66-2.046.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764.442.505.661 1.187.661 2.046v4.203z" data-astro-cid-3ef6ksr2></path></svg> </a> <a href="https://twitter.com/astrodotbuild" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Follow Astro on Twitter</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" data-astro-cid-3ef6ksr2></path></svg> </a> <a href="https://github.com/withastro/astro" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Go to Astro's GitHub repo</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-3ef6ksr2></path></svg> </a> </div> </nav> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="hero-image" data-astro-cid-bvzihdzo> <img width="1020" height="510" src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%221440%22%20height%3D%22720%22%20viewBox%3D%220%200%201440%20720%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22hsl(33%2085%25%2055%25)%22%2F%3E%3Cstop%20offset%3D%220.55%22%20stop-color%3D%22hsl(208%2090%25%2050%25)%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl(264%2085%25%2060%25)%22%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20id%3D%22s%22%20x1%3D%220%22%20y1%3D%221%22%20x2%3D%221%22%20y2%3D%220%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22rgba(0%2C0%2C0%2C0.55)%22%2F%3E%3Cstop%20offset%3D%220.65%22%20stop-color%3D%22rgba(0%2C0%2C0%2C0)%22%2F%3E%3C%2FlinearGradient%3E%3Cpattern%20id%3D%22p%22%20width%3D%2218%22%20height%3D%2218%22%20patternUnits%3D%22userSpaceOnUse%22%20patternTransform%3D%22rotate(28)%22%3E%3Crect%20width%3D%2218%22%20height%3D%2218%22%20fill%3D%22none%22%2F%3E%3Cpath%20d%3D%22M0%209H18%22%20stroke%3D%22rgba(255%2C255%2C255%2C0.13)%22%20stroke-width%3D%222%22%2F%3E%3C%2Fpattern%3E%3C%2Fdefs%3E%3Crect%20width%3D%221440%22%20height%3D%22720%22%20fill%3D%22url(%23g)%22%2F%3E%3Crect%20width%3D%221440%22%20height%3D%22720%22%20fill%3D%22url(%23p)%22%20opacity%3D%220.75%22%2F%3E%3Crect%20width%3D%221440%22%20height%3D%22720%22%20fill%3D%22url(%23s)%22%2F%3E%3Cg%20opacity%3D%220.9%22%20fill%3D%22rgba(255%2C255%2C255%2C0.85)%22%20font-family%3D%22ui-sans-serif%2C%20system-ui%2C%20-apple-system%2C%20Segoe%20UI%2C%20Roboto%2C%20Helvetica%2C%20Arial%22%20font-weight%3D%22700%22%20letter-spacing%3D%220.28em%22%20font-size%3D%2222%22%3E%3Ctext%20x%3D%2272%22%20y%3D%2292%22%3EHARRY%20BLOG%3C%2Ftext%3E%3C%2Fg%3E%3Cg%20opacity%3D%220.75%22%20fill%3D%22rgba(255%2C255%2C255%2C0.9)%22%20font-family%3D%22ui-sans-serif%2C%20system-ui%2C%20-apple-system%2C%20Segoe%20UI%2C%20Roboto%2C%20Helvetica%2C%20Arial%22%20font-weight%3D%22800%22%20font-size%3D%2248%22%3E%3Ctext%20x%3D%2272%22%20y%3D%22660%22%3E%E6%8A%8A%E5%8D%94%E4%BD%9C%E7%95%B6%E6%88%90%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%EF%BC%9A%E6%88%91%E5%80%91%E7%9A%84%20CLAUDE.md%20%E8%88%87%E6%9C%80%E5%B0%8F%E6%94%B9%E5%8B%95%E5%8E%9F%E5%89%87%3C%2Ftext%3E%3C%2Fg%3E%3Cg%20opacity%3D%220.65%22%20fill%3D%22rgba(255%2C255%2C255%2C0.75)%22%20font-family%3D%22ui-monospace%2C%20SFMono-Regular%2C%20Menlo%2C%20Monaco%2C%20Consolas%2C%20Liberation%20Mono%2C%20Courier%20New%2C%20monospace%22%20font-size%3D%2216%22%3E%3Ctext%20x%3D%2272%22%20y%3D%22138%22%3EHASH%3Ac5903b71%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fsvg%3E" alt="" data-astro-cid-bvzihdzo> </div> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2026-03-19T00:00:00.000Z"> Mar 19, 2026 </time>  </div> <h1 data-astro-cid-bvzihdzo>把協作當成系統設計：我們的 CLAUDE.md 與最小改動原則</h1> <hr data-astro-cid-bvzihdzo> </div>  <p><code>CLAUDE.md</code> 一定要放在「專案根目錄（repository root）」而且要跟 <code>README.md</code>、<code>package.json</code> 同一層。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>my-project/</span></span>
+<span class="line"><span>├─ CLAUDE.md</span></span>
+<span class="line"><span>├─ README.md</span></span>
+<span class="line"><span>├─ package.json</span></span>
+<span class="line"><span>├─ pnpm-lock.yaml</span></span>
+<span class="line"><span>├─ src/</span></span>
+<span class="line"><span>├─ docs/</span></span>
+<span class="line"><span>└─ specs/</span></span></code></pre>
+<p>老實說，這套做法不是一開始就規劃好的。它是很多次多人協作、反覆改需求、處理 merge conflict，以及一次又一次看到「明明專案裡已經有現成做法，卻還是重寫一套」之後，慢慢逼出來的。</p>
+<p>最後我得到一個很直接的結論：真正拖慢專案的，從來不是寫程式，而是不斷重來、不斷修正理解、不斷重複造輪子。</p>
+<p>在多人協作裡，最耗能的事情通常不是技術，而是這些狀況：</p>
+<ul>
+<li>每個人對「應該怎麼做」的理解不同</li>
+<li>改需求時，很難快速判斷影響範圍</li>
+<li>Code review 變成在討論風格、習慣，而不是問題本身</li>
+<li>同樣的提醒，要一再重複對人、對 AI 說</li>
+</ul>
+<p>如果這些原則只靠默契或對話傳遞，它一定會失真。所以我選擇把它們寫成一份 <code>CLAUDE.md</code>，放在專案根目錄，讓它變成：人、AI、與 code review 都共同遵守的協作規則。</p>
+<p>透過 OpenSpec，把需求先整理成結構化的規格，再用 <code>CLAUDE.md</code> 明確限制「可以做什麼、不能做什麼」。結果是：</p>
+<ul>
+<li>討論次數變少</li>
+<li>誤解發生得更早（不會寫到一半才發現方向錯了）</li>
+<li>前期溝通時間實際少了約 30～50%</li>
+</ul>
+<p>最大的改變其實是一個工作順序的轉換：改需求時，我先確認「哪些不用動」，而不是急著想「要加什麼」。因為規則要求：</p>
+<ul>
+<li>先列出最小必要改動的檔案</li>
+<li>先確認影響範圍</li>
+<li>嚴禁順便重構或整理</li>
+</ul>
+<p>這讓改需求變成一個「可預期的小調整」，而不是一次高風險的重構。</p>
+<p>在像 Vben Admin 這種後台框架裡，「自己再寫一套」往往不是效率，而是技術債的開始。我們把「框架優先、禁止重複造輪子」寫成明確規則後：</p>
+<ul>
+<li>多數功能只需要調整既有組件或設定</li>
+<li>很少再出現自製 table / modal / form</li>
+<li>專案風格與維護方式更一致</li>
+</ul>
+<p>因為它把很多原本「不好意思講」的事情，變成：不是你對我，而是大家一起遵守同一份規則。Review 時我不需要說「我覺得你這樣寫不太好」，我只需要說「這裡不符合 CLAUDE.md 裡的最小改動或重用原則」。</p>
+<h2 id="claudemd放在專案根目錄">CLAUDE.md（放在專案根目錄）</h2>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="md"><code><span class="line"><span style="color:#79B8FF;font-weight:bold"># 專案開發指引</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF;font-weight:bold">## 專案架構說明</span></span>
+<span class="line"><span style="color:#E1E4E8">本專案基於 </span><span style="color:#E1E4E8;font-weight:bold">**Vben Admin**</span><span style="color:#E1E4E8"> 框架開發，是一個多人協作的後台管理系統。</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF;font-weight:bold">### 🔧 框架重用原則</span></span>
+<span class="line"><span style="color:#E1E4E8">⚠️ </span><span style="color:#E1E4E8;font-weight:bold">**禁止重複造輪子**</span><span style="color:#E1E4E8"> - Vben Admin 已提供大量開箱即用的功能和組件。</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8;font-weight:bold">**開發前必須檢查**</span><span style="color:#E1E4E8">：</span></span>
+<span class="line"><span style="color:#FFAB70">1.</span><span style="color:#E1E4E8;font-weight:bold"> **組件庫優先**</span><span style="color:#E1E4E8">：</span></span>
+<span class="line"><span style="color:#FFAB70">   -</span><span style="color:#E1E4E8"> 檢查 </span><span style="color:#79B8FF">`src/components/`</span><span style="color:#E1E4E8"> 是否已有相似組件</span></span>
+<span class="line"><span style="color:#FFAB70">   -</span><span style="color:#E1E4E8"> 查看 Vben Admin 官方文檔確認內建功能</span></span>
+<span class="line"><span style="color:#FFAB70">   -</span><span style="color:#E1E4E8"> 優先使用框架提供的 hooks、utils、組件</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FFAB70">2.</span><span style="color:#E1E4E8;font-weight:bold"> **調整而非重寫**</span><span style="color:#E1E4E8">：</span></span>
+<span class="line"><span style="color:#FFAB70">   -</span><span style="color:#E1E4E8"> 如果現有組件 80% 符合需求，調整它而不是新建</span></span>
+<span class="line"><span style="color:#FFAB70">   -</span><span style="color:#E1E4E8"> 使用組件的配置選項和插槽來定制</span></span>
+<span class="line"><span style="color:#FFAB70">   -</span><span style="color:#E1E4E8"> 通過 props 和 events 擴展功能</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FFAB70">3.</span><span style="color:#E1E4E8;font-weight:bold"> **常見已有功能**</span><span style="color:#E1E4E8">（請勿重複實現）：</span></span>
+<span class="line"><span style="color:#FFAB70">   -</span><span style="color:#E1E4E8"> 表單驗證、表格操作、彈窗管理</span></span>
+<span class="line"><span style="color:#FFAB70">   -</span><span style="color:#E1E4E8"> 權限控制、路由守衛、標籤頁管理</span></span>
+<span class="line"><span style="color:#FFAB70">   -</span><span style="color:#E1E4E8"> 請求封裝、錯誤處理、loading 狀態</span></span>
+<span class="line"><span style="color:#FFAB70">   -</span><span style="color:#E1E4E8"> 主題切換、國際化、布局組件</span></span>
+<span class="line"><span style="color:#FFAB70">   -</span><span style="color:#E1E4E8"> 工具函數：日期處理、樹形數據、深拷貝等</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8;font-weight:bold">**原則**</span><span style="color:#E1E4E8">：先搜尋、再調整、最後才考慮新建。減少不必要的程式碼。</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF;font-weight:bold">---</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF;font-weight:bold">## 開發原則</span></span>
+<span class="line"><span style="color:#E1E4E8">⚠️ </span><span style="color:#E1E4E8;font-weight:bold">**所有開發工作都必須遵循**</span><span style="color:#79B8FF"> `.claude/development-principles.md`</span><span style="color:#E1E4E8"> 中定義的 YAGNI 原則和最小改動原則。</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">核心原則：</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> 只修改完成任務「絕對必要」的文件</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> 先分析、列出改動清單，等待確認後再執行</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> 嚴禁「順便」優化、重構或改變代碼風格</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> 記住：</span><span style="color:#E1E4E8;font-weight:bold">**最好的代碼是寫得最少的代碼**</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">詳細內容請參閱：</span><span style="color:#79B8FF">`.claude/development-principles.md`</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF;font-weight:bold">---</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF;font-weight:bold">## Model Usage Strategy (Token Efficiency)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">為降低 token 消耗並提升協作效率，本專案採用「模型分工」策略。</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF;font-weight:bold">### 可使用較低成本模型的情境（如 Gemini）</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">僅限於 </span><span style="color:#E1E4E8;font-weight:bold">**前處理、分析、整理類任務**</span><span style="color:#E1E4E8">，包括但不限於：</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> 條列既有程式碼結構</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> 搜尋與彙整既有元件 / hooks / utils</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> 列出可能重用的 Vben Admin 能力</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> 產出「計畫修改的檔案清單」</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> 產出「每個檔案預計修改內容說明」</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> 將需求整理為結構化清單（不涉及設計決策）</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF;font-weight:bold">### 強制限制</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> 低成本模型 </span><span style="color:#E1E4E8;font-weight:bold">**不得**</span><span style="color:#E1E4E8">：</span></span>
+<span class="line"><span style="color:#FFAB70">  -</span><span style="color:#E1E4E8"> 產出實際實作代碼</span></span>
+<span class="line"><span style="color:#FFAB70">  -</span><span style="color:#E1E4E8"> 做架構設計或重構決策</span></span>
+<span class="line"><span style="color:#FFAB70">  -</span><span style="color:#E1E4E8"> 新增功能或提出實作方案</span></span>
+<span class="line"><span style="color:#FFAB70">  -</span><span style="color:#E1E4E8"> 違反本文件中任何開發原則</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> 所有輸出必須：</span></span>
+<span class="line"><span style="color:#FFAB70">  -</span><span style="color:#E1E4E8"> 嚴格遵守本 </span><span style="color:#79B8FF">`CLAUDE.md`</span><span style="color:#E1E4E8"> 中的規範</span></span>
+<span class="line"><span style="color:#FFAB70">  -</span><span style="color:#E1E4E8"> 僅作為「輔助分析結果」，而非最終決策</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF;font-weight:bold">### 必須使用 Claude 的情境</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">以下情境 </span><span style="color:#E1E4E8;font-weight:bold">**必須由 Claude 處理**</span><span style="color:#E1E4E8">：</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#79B8FF"> `/openspec:proposal`</span><span style="color:#E1E4E8"> 的最終內容確認</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#79B8FF"> `/openspec:apply`</span><span style="color:#E1E4E8"> 的實作與修改</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#79B8FF"> `/openspec:archive`</span><span style="color:#E1E4E8"> 的規格收斂</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> 任何涉及：</span></span>
+<span class="line"><span style="color:#FFAB70">  -</span><span style="color:#E1E4E8"> 實際程式碼修改</span></span>
+<span class="line"><span style="color:#FFAB70">  -</span><span style="color:#E1E4E8"> 設計選擇</span></span>
+<span class="line"><span style="color:#FFAB70">  -</span><span style="color:#E1E4E8"> Scope 判斷</span></span>
+<span class="line"><span style="color:#FFAB70">  -</span><span style="color:#E1E4E8"> 取捨與風險評估</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF;font-weight:bold">### 原則</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#85E89D">> 低成本模型負責「整理與檢索」  </span></span>
+<span class="line"><span style="color:#85E89D">> Claude 負責「判斷與執行」</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">不得自行切換角色或越權執行。</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF;font-weight:bold">---</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF;font-weight:bold"># OpenSpec Instructions</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">These instructions are for AI assistants working in this project.</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">Always open </span><span style="color:#79B8FF">`@/openspec/AGENTS.md`</span><span style="color:#E1E4E8"> when the request:</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> Mentions planning or proposals (words like proposal, spec, change, plan)</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> Introduces new capabilities, breaking changes, architecture shifts, or big performance/security work</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> Sounds ambiguous and you need the authoritative spec before coding</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">Use </span><span style="color:#79B8FF">`@/openspec/AGENTS.md`</span><span style="color:#E1E4E8"> to learn:</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> How to create and apply change proposals</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> Spec format and conventions</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> Project structure and guidelines</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">Keep this managed block so 'openspec update' can refresh the instructions.</span></span></code></pre>
+<h2 id="claudedevelopment-principlesmd">.claude/development-principles.md</h2>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="md"><code><span class="line"><span style="color:#79B8FF;font-weight:bold"># 開發原則 (Development Principles)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF;font-weight:bold">## 專案背景</span></span>
+<span class="line"><span style="color:#E1E4E8">本專案基於 </span><span style="color:#E1E4E8;font-weight:bold">**Vben Admin**</span><span style="color:#E1E4E8"> 框架開發，是一個多人協作的後台管理系統。</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF;font-weight:bold">## 框架重用原則 - 禁止重複造輪子</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF;font-weight:bold">### 開發前檢查清單</span></span>
+<span class="line"><span style="color:#E1E4E8">在實現任何功能前，</span><span style="color:#E1E4E8;font-weight:bold">**必須先檢查**</span><span style="color:#E1E4E8"> Vben Admin 是否已提供相關功能：</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FFAB70">1.</span><span style="color:#E1E4E8;font-weight:bold"> **組件庫優先**</span><span style="color:#E1E4E8">：</span></span>
+<span class="line"><span style="color:#FFAB70">   -</span><span style="color:#E1E4E8"> 檢查 </span><span style="color:#79B8FF">`src/components/`</span><span style="color:#E1E4E8"> 目錄</span></span>
+<span class="line"><span style="color:#FFAB70">   -</span><span style="color:#E1E4E8"> 查閱 Vben Admin 官方文檔</span></span>
+<span class="line"><span style="color:#FFAB70">   -</span><span style="color:#E1E4E8"> 搜尋現有的 hooks、utils、組件</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FFAB70">2.</span><span style="color:#E1E4E8;font-weight:bold"> **調整而非重寫**</span><span style="color:#E1E4E8">：</span></span>
+<span class="line"><span style="color:#FFAB70">   -</span><span style="color:#E1E4E8"> 現有組件符合 80% 需求 → 調整配置</span></span>
+<span class="line"><span style="color:#FFAB70">   -</span><span style="color:#E1E4E8"> 使用組件的 props、slots、events 擴展</span></span>
+<span class="line"><span style="color:#FFAB70">   -</span><span style="color:#E1E4E8"> 避免複製貼上後修改（維護噩夢）</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FFAB70">3.</span><span style="color:#E1E4E8;font-weight:bold"> **Vben 已提供的常見功能**</span><span style="color:#E1E4E8">（請勿重複實現）：</span></span>
+<span class="line"><span style="color:#FFAB70">   -</span><span style="color:#E1E4E8"> 表單系統：驗證、動態表單、表單聯動</span></span>
+<span class="line"><span style="color:#FFAB70">   -</span><span style="color:#E1E4E8"> 表格系統：排序、篩選、分頁、導出</span></span>
+<span class="line"><span style="color:#FFAB70">   -</span><span style="color:#E1E4E8"> 彈窗管理：Modal、Drawer 組件</span></span>
+<span class="line"><span style="color:#FFAB70">   -</span><span style="color:#E1E4E8"> 權限系統：路由守衛、按鈕權限、數據權限</span></span>
+<span class="line"><span style="color:#FFAB70">   -</span><span style="color:#E1E4E8"> 標籤頁管理：多標籤、緩存、拖拽排序</span></span>
+<span class="line"><span style="color:#FFAB70">   -</span><span style="color:#E1E4E8"> 請求封裝：攔截器、錯誤處理、loading</span></span>
+<span class="line"><span style="color:#FFAB70">   -</span><span style="color:#E1E4E8"> 布局系統：側邊欄、頂欄、主題切換</span></span>
+<span class="line"><span style="color:#FFAB70">   -</span><span style="color:#E1E4E8"> 工具函數：日期處理、樹形數據、深拷貝等</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF;font-weight:bold">### 決策流程</span></span>
+<span class="line"><span style="color:#E1E4E8">需要實現功能</span></span>
+<span class="line"><span style="color:#E1E4E8">    ↓</span></span>
+<span class="line"><span style="color:#E1E4E8">檢查 Vben 是否已有 ────→ 有 ────→ 直接使用或調整配置</span></span>
+<span class="line"><span style="color:#E1E4E8">    ↓ 沒有</span></span>
+<span class="line"><span style="color:#E1E4E8">檢查 src/components/ ───→ 有類似 ─→ 調整現有組件</span></span>
+<span class="line"><span style="color:#E1E4E8">    ↓ 沒有</span></span>
+<span class="line"><span style="color:#E1E4E8">確認無法重用 ─────────→ 新建（最後手段）</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8;font-weight:bold">**原則：先搜尋、再調整、最後才新建。**</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF;font-weight:bold">---</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF;font-weight:bold">## 遵循 YAGNI (You Aren't Gonna Need It) 原則</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF;font-weight:bold">### 1. 最小改動原則</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> 只修改完成任務「絕對必要」的文件</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> 不做任何「順便」的優化、重構或改進</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> 不修改格式、不調整 import 順序、不改變現有代碼風格</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF;font-weight:bold">### 2. 先分析後動手</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> 先告訴我你計劃修改哪些文件</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> 先告訴我每個文件具體要改什麼</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> 等我確認後再開始修改</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF;font-weight:bold">### 3. 嚴格禁止</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> ❌ 修改不相關的文件</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> ❌ 「順便」重構現有代碼</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> ❌ 添加「可能以後用得上」的功能</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> ❌ 改變現有的代碼結構</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF;font-weight:bold">### 4. 執行步驟</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8;font-weight:bold"> **Step 1**</span><span style="color:#E1E4E8">: 分析問題，列出最小必要改動</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8;font-weight:bold"> **Step 2**</span><span style="color:#E1E4E8">: 向我確認改動範圍</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8;font-weight:bold"> **Step 3**</span><span style="color:#E1E4E8">: 只修改確認過的部分</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8;font-weight:bold"> **Step 4**</span><span style="color:#E1E4E8">: 完成後自我檢查是否有多餘改動</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF;font-weight:bold">---</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8;font-weight:bold">**記住：最好的代碼是寫得最少的代碼。**</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF;font-weight:bold">---</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF;font-weight:bold">## Model Usage Strategy (Token Efficiency)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">為降低 token 消耗並提升協作效率，本專案採用「模型分工」策略。</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF;font-weight:bold">### 可使用較低成本模型的情境（如 Gemini）</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">僅限於 </span><span style="color:#E1E4E8;font-weight:bold">**前處理、分析、整理類任務**</span><span style="color:#E1E4E8">，包括但不限於：</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> 條列既有程式碼結構</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> 搜尋與彙整既有元件 / hooks / utils</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> 列出可能重用的 Vben Admin 能力</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> 產出「計畫修改的檔案清單」</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> 產出「每個檔案預計修改內容說明」</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> 將需求整理為結構化清單（不涉及設計決策）</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF;font-weight:bold">### 強制限制</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> 低成本模型 </span><span style="color:#E1E4E8;font-weight:bold">**不得**</span><span style="color:#E1E4E8">：</span></span>
+<span class="line"><span style="color:#FFAB70">  -</span><span style="color:#E1E4E8"> 產出實際實作代碼</span></span>
+<span class="line"><span style="color:#FFAB70">  -</span><span style="color:#E1E4E8"> 做架構設計或重構決策</span></span>
+<span class="line"><span style="color:#FFAB70">  -</span><span style="color:#E1E4E8"> 新增功能或提出實作方案</span></span>
+<span class="line"><span style="color:#FFAB70">  -</span><span style="color:#E1E4E8"> 違反本文件中任何開發原則</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> 所有輸出必須：</span></span>
+<span class="line"><span style="color:#FFAB70">  -</span><span style="color:#E1E4E8"> 嚴格遵守本 </span><span style="color:#79B8FF">`CLAUDE.md`</span><span style="color:#E1E4E8"> 中的規範</span></span>
+<span class="line"><span style="color:#FFAB70">  -</span><span style="color:#E1E4E8"> 僅作為「輔助分析結果」，而非最終決策</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF;font-weight:bold">### 必須使用 Claude 的情境</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">以下情境 </span><span style="color:#E1E4E8;font-weight:bold">**必須由 Claude 處理**</span><span style="color:#E1E4E8">：</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#79B8FF"> `/openspec:proposal`</span><span style="color:#E1E4E8"> 的最終內容確認</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#79B8FF"> `/openspec:apply`</span><span style="color:#E1E4E8"> 的實作與修改</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#79B8FF"> `/openspec:archive`</span><span style="color:#E1E4E8"> 的規格收斂</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> 任何涉及：</span></span>
+<span class="line"><span style="color:#FFAB70">  -</span><span style="color:#E1E4E8"> 實際程式碼修改</span></span>
+<span class="line"><span style="color:#FFAB70">  -</span><span style="color:#E1E4E8"> 設計選擇</span></span>
+<span class="line"><span style="color:#FFAB70">  -</span><span style="color:#E1E4E8"> Scope 判斷</span></span>
+<span class="line"><span style="color:#FFAB70">  -</span><span style="color:#E1E4E8"> 取捨與風險評估</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF;font-weight:bold">### 原則</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#85E89D">> 低成本模型負責「整理與檢索」  </span></span>
+<span class="line"><span style="color:#85E89D">> Claude 負責「判斷與執行」</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">不得自行切換角色或越權執行。</span></span></code></pre>
+<h2 id="在-vben-admin-專案裡談-yagni-的真正意思">在 Vben Admin 專案裡談 YAGNI 的真正意思</h2>
+<p>在一般 Vue 專案裡談 YAGNI，有時會被誤解成「先不要想那麼遠」。但在 Vben Admin 這種高度封裝、已有完整規範的後台框架裡，YAGNI 的意義其實更清楚，也更務實。因為在 Vben 裡，「未來」早就被框架替你想過一次了。</p>
+<p>Vben Admin 不是一個空白框架，它已經幫你處理好：</p>
+<ul>
+<li>CRUD 頁面的典型流程</li>
+<li>Table / Form / Modal / Drawer 的組合方式</li>
+<li>權限、路由、選單、快取的慣用解法</li>
+<li>request / loading / error handling 的一致做法</li>
+<li>hooks、utils、schema 的使用模式</li>
+</ul>
+<p>這些本來就來自無數真實後台專案的需求總和。所以在 Vben 專案裡：你以為你在「為未來設計」，其實很可能只是重複做了一次 Vben 已經做過的事。</p>
+<p>你一定不陌生這些句子：</p>
+<ul>
+<li>「這個 Table 我自己包一個，之後比較好擴充」</li>
+<li>「這個流程先抽一層，未來可能會用到」</li>
+<li>「Vben 那個太複雜，我先寫一個簡單版」</li>
+</ul>
+<p>在一般專案裡可能合理；但在 Vben 底下，幾乎都是在製造平行系統。結果通常是：同一種功能有兩套寫法、新人不知道該用哪一套、AI 也搞不清楚該遵循哪個 pattern、後期維護成本急速上升。</p>
+<p>把話講白一點：Vben 的設計哲學，本身就很 YAGNI。它不是要你每次都發明新架構、每個需求都客製到極致，而是要你：在既有規範內解決 80～90% 的問題，真的不行，再「最小幅度」擴充。</p>
+<hr>
+<p>來源：<a href="https://uneven-tarantula-5e0.notion.site/CLAUDE-md-vben-admin-2e148a1740bf807f9ef5f1617f3b9e74">https://uneven-tarantula-5e0.notion.site/CLAUDE-md-vben-admin-2e148a1740bf807f9ef5f1617f3b9e74</a></p>  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2026 Your name here. All rights reserved.
+<div class="social-links" data-astro-cid-sz7xmlte> <a href="https://m.webtoo.ls/@astro" target="_blank" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Follow Astro on Mastodon</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" astro-icon="social/mastodon" data-astro-cid-sz7xmlte><path fill="currentColor" d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a3.614 3.614 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522c0-.859.22-1.541.66-2.046.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764.442.505.661 1.187.661 2.046v4.203z" data-astro-cid-sz7xmlte></path></svg> </a> <a href="https://twitter.com/astrodotbuild" target="_blank" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Follow Astro on Twitter</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" astro-icon="social/twitter" data-astro-cid-sz7xmlte><path fill="currentColor" d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" data-astro-cid-sz7xmlte></path></svg> </a> <a href="https://github.com/withastro/astro" target="_blank" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Go to Astro's GitHub repo</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" astro-icon="social/github" data-astro-cid-sz7xmlte><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-sz7xmlte></path></svg> </a> </div> </footer>  </body></html>
