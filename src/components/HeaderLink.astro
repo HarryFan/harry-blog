@@ -4,21 +4,33 @@ import type { HTMLAttributes } from 'astro/types';
 type Props = HTMLAttributes<'a'>;
 
 const { href, class: className, ...props } = Astro.props;
-// 確保 href 為字串
 const rawHref = typeof href === 'string' ? href : href?.toString() ?? '/';
 
-// 取得目前路徑，去除 base path
-const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, '');
-const subpath = pathname.match(/[^\/]+/g);
-const isActive = rawHref === pathname || rawHref === '/' + (subpath?.[0] || '');
+const normalizePath = (input: string) => {
+	const base = import.meta.env.BASE_URL;
+	let path = input.startsWith(base) ? input.slice(base.length - 1) : input;
+	if (!path.startsWith('/')) path = `/${path}`;
+	path = path.replace(/\/+/g, '/');
+	if (path.length > 1) path = path.replace(/\/$/, '');
+	return path;
+};
 
-// 若為站內連結 (以 / 開頭)，自動補上 base path，避免在子目錄部署時 404
+const currentPath = normalizePath(Astro.url.pathname);
+const targetPath = normalizePath(rawHref);
+const currentTopLevel = `/${currentPath.split('/').filter(Boolean)[0] ?? ''}`;
+const isActive = targetPath === currentPath || (targetPath !== '/' && targetPath === currentTopLevel);
+
 const resolvedHref = rawHref.startsWith('/')
-  ? `${import.meta.env.BASE_URL}${rawHref.slice(1)}`
-  : rawHref;
+	? `${import.meta.env.BASE_URL}${rawHref.slice(1)}`
+	: rawHref;
 ---
 
-<a href={resolvedHref} class:list={[className, { active: isActive }]} {...props}>
+<a
+	href={resolvedHref}
+	class:list={[className, { active: isActive }]}
+	aria-current={isActive ? 'page' : undefined}
+	{...props}
+>
 	<slot />
 </a>
 <style>
