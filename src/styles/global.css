@@ -113,17 +113,18 @@ b {
 	font-weight: 700;
 }
 a {
-	color: var(--teal);
+	color: var(--accent-dark);
 	text-decoration-thickness: 0.08em;
 	text-underline-offset: 0.18em;
 }
 a:hover {
-	color: var(--red);
+	color: #9f251d;
 }
 a:focus-visible,
 button:focus-visible {
-	outline: 3px solid var(--yellow);
+	outline: 3px solid rgb(var(--ink));
 	outline-offset: 4px;
+	box-shadow: 0 0 0 7px var(--yellow);
 }
 p {
 	margin: 0 0 1em;
