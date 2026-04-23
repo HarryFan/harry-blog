@@ -21,41 +21,96 @@ const coverSrc = heroSrc ?? coverSvgDataUri(title);
 		<BaseHead title={title} description={description} />
 		<style>
 			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
+				width: calc(100% - 2rem);
+				max-width: var(--wide-width);
+				margin: 0 auto;
+				padding-top: clamp(1.5rem, 4vw, 3rem);
 			}
+
+			article {
+				display: grid;
+				gap: clamp(1.5rem, 4vw, 3rem);
+			}
+
 			.hero-image {
 				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
+				background: var(--paper-soft);
+				border: 4px solid var(--rule);
 				box-shadow: var(--box-shadow);
 			}
+
+			.hero-image img {
+				display: block;
+				width: 100%;
+				margin: 0;
+				border-radius: 0;
+			}
+
 			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
+				width: var(--content-width);
+				max-width: 100%;
 				margin: auto;
-				padding: 1em;
+				padding: 0 0 clamp(2rem, 6vw, 5rem);
 				color: rgb(var(--gray-dark));
 			}
+
 			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
+				position: relative;
+				margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+				padding: clamp(1.2rem, 4vw, 2rem) 0;
+				text-align: left;
 				line-height: 1;
+				border-top: 4px solid var(--rule);
+				border-bottom: 4px solid var(--rule);
 			}
+
+			.title::after {
+				content: '';
+				position: absolute;
+				right: 0;
+				bottom: -11px;
+				width: min(38vw, 280px);
+				height: 18px;
+				background: var(--yellow);
+				border: 3px solid var(--rule);
+				transform: rotate(-1.5deg);
+			}
+
 			.title h1 {
-				margin: 0 0 0.5em 0;
+				margin: 0;
+				font-family: Georgia, 'Times New Roman', serif;
+				font-size: clamp(2.4rem, 7vw, 5.2rem);
+				line-height: 0.92;
 			}
+
 			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
+				display: inline-flex;
+				flex-wrap: wrap;
+				gap: 0.5rem;
+				margin-bottom: 1rem;
+				padding: 0.4rem 0.6rem;
+				background: var(--red);
+				border: 2px solid var(--rule);
+				color: var(--paper-soft);
+				font-size: 0.9rem;
+				font-weight: 700;
+				line-height: 1.2;
+				transform: rotate(-1deg);
 			}
+
 			.last-updated-on {
-				font-style: italic;
+				font-style: normal;
+				opacity: 0.88;
+			}
+
+			@media (max-width: 720px) {
+				main {
+					width: calc(100% - 1.25rem);
+				}
+
+				.hero-image {
+					box-shadow: 6px 6px 0 var(--yellow);
+				}
 			}
 		</style>
 	</head>
