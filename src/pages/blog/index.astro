@@ -185,6 +185,20 @@ const posts = (await getCollection('blog')).sort(
 				padding: 0;
 			}
 
+			.posts-heading {
+				display: inline-flex;
+				margin: 0 0 1rem;
+				padding: 0.35rem 0.6rem;
+				background: var(--teal);
+				border: 2px solid var(--rule);
+				color: var(--paper-soft);
+				font-size: 0.9rem;
+				font-weight: 700;
+				letter-spacing: 0.12em;
+				line-height: 1;
+				text-transform: uppercase;
+			}
+
 			.post-list li:first-child {
 				grid-column: 1 / -1;
 			}
@@ -199,7 +213,8 @@ const posts = (await getCollection('blog')).sort(
 				transition: transform 0.18s ease, box-shadow 0.18s ease;
 			}
 
-			.post-card:hover {
+			.post-card:hover,
+			.post-card:focus-visible {
 				color: rgb(var(--ink));
 				box-shadow: var(--box-shadow-red);
 				transform: translate(-3px, -3px) rotate(-0.4deg);
@@ -288,6 +303,7 @@ const posts = (await getCollection('blog')).sort(
 	<body>
 		<Header />
 		<main>
+			<h1 class="sr-only">Harry / Tech Blog</h1>
 			<section class="intro-section">
 				<div class="intro-shell">
 					<div class="intro-copy">
@@ -323,7 +339,8 @@ const posts = (await getCollection('blog')).sort(
 				</div>
 			</section>
 			
-			<section>
+			<section class="posts-section" aria-labelledby="posts-heading">
+				<h2 id="posts-heading" class="posts-heading">Latest notes</h2>
 				<ul class="post-list">
 					{
 						posts.map((post) => (
@@ -339,7 +356,7 @@ const posts = (await getCollection('blog')).sort(
 										alt=""
 									/>
 									<div class="post-card__body">
-										<h4 class="title">{post.data.title}</h4>
+										<h3 class="title">{post.data.title}</h3>
 										<p class="date">
 											<FormattedDate date={post.data.pubDate} />
 										</p>
