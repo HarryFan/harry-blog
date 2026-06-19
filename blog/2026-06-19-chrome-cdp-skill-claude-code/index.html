@@ -1,0 +1,137 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Harry / Tech" href="https://harryfan.github.io/rss.xml"><meta name="generator" content="Astro v5.7.13"><!-- Font preloads --><link rel="preload" href="/harry-blog/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin><link rel="preload" href="/harry-blog/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin><!-- 開發環境的 base URL 處理 --><!-- Canonical URL --><link rel="canonical" href="https://harryfan.github.io/harry-blog/blog/2026-06-19-chrome-cdp-skill-claude-code/"><!-- Primary Meta Tags --><title>讓 Claude Code 接手你正在用的 Chrome，當你的瀏覽器自動化助手</title><meta name="title" content="讓 Claude Code 接手你正在用的 Chrome，當你的瀏覽器自動化助手"><meta name="description" content="透過 chrome-cdp-skill 這個 Claude Code Skill，Claude 可以接手你「現在正開著、已經登入好」的那個 Chrome，幫你彙整分頁資訊、抓 DOM、截圖、填表單、做前端除錯。安裝一行指令，啟用撥一個開關，不到五分鐘。"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://harryfan.github.io/harry-blog/blog/2026-06-19-chrome-cdp-skill-claude-code/"><meta property="og:title" content="讓 Claude Code 接手你正在用的 Chrome，當你的瀏覽器自動化助手"><meta property="og:description" content="透過 chrome-cdp-skill 這個 Claude Code Skill，Claude 可以接手你「現在正開著、已經登入好」的那個 Chrome，幫你彙整分頁資訊、抓 DOM、截圖、填表單、做前端除錯。安裝一行指令，啟用撥一個開關，不到五分鐘。"><meta property="og:image" content="https://harryfan.github.io/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://harryfan.github.io/harry-blog/blog/2026-06-19-chrome-cdp-skill-claude-code/"><meta property="twitter:title" content="讓 Claude Code 接手你正在用的 Chrome，當你的瀏覽器自動化助手"><meta property="twitter:description" content="透過 chrome-cdp-skill 這個 Claude Code Skill，Claude 可以接手你「現在正開著、已經登入好」的那個 Chrome，幫你彙整分頁資訊、抓 DOM、截圖、填表單、做前端除錯。安裝一行指令，啟用撥一個開關，不到五分鐘。"><meta property="twitter:image" content="https://harryfan.github.io/blog-placeholder-1.jpg"><style>:root{--accent: #137f73;--accent-dark: #0c5149;--paper: #f4e6cf;--paper-soft: #fbf3e5;--paper-deep: #e9cfaa;--ink: 31, 27, 23;--black: 31, 27, 23;--muted: 104, 87, 70;--gray: 104, 87, 70;--gray-light: 226, 199, 161;--gray-dark: 52, 43, 35;--red: #df3f31;--yellow: #edbd37;--teal: #137f73;--clay: #a3543f;--rule: rgba(var(--ink), .9);--soft-rule: rgba(var(--ink), .18);--gray-gradient: color-mix(in srgb, var(--paper-deep) 42%, transparent), var(--paper);--box-shadow: 10px 10px 0 var(--yellow);--box-shadow-red: 10px 10px 0 var(--red);--content-width: 720px;--wide-width: 1080px;--radius: 6px}@font-face{font-family:Atkinson;src:url(../fonts/atkinson-regular.woff) format("woff");font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:Atkinson;src:url(../fonts/atkinson-bold.woff) format("woff");font-weight:700;font-style:normal;font-display:swap}*{box-sizing:border-box}body{font-family:Atkinson,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;margin:0;padding:0;text-align:left;background:linear-gradient(90deg,rgba(var(--ink),.035) 1px,transparent 1px),linear-gradient(180deg,rgba(var(--ink),.025) 1px,transparent 1px),var(--paper);background-size:42px 42px,42px 42px,auto;word-wrap:break-word;overflow-wrap:break-word;color:rgb(var(--gray-dark));font-size:20px;line-height:1.72}body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(circle at 10% 8%,rgba(223,63,49,.12) 0 90px,transparent 92px),radial-gradient(circle at 92% 16%,rgba(19,127,115,.11) 0 120px,transparent 122px),linear-gradient(135deg,transparent 0 78%,rgba(237,189,55,.18) 78% 82%,transparent 82%)}main{width:var(--content-width);max-width:calc(100% - 2rem);margin:auto;padding:clamp(2rem,5vw,4.5rem) 0}h1,h2,h3,h4,h5,h6{margin:0 0 .5rem;color:rgb(var(--ink));line-height:1.08;font-weight:800}h1{font-size:clamp(2.4rem,6vw,4.2rem)}h2{font-size:clamp(1.9rem,4vw,3rem)}h3{font-size:clamp(1.45rem,3vw,2.2rem)}h4{font-size:clamp(1.15rem,2vw,1.55rem)}h5{font-size:1.15rem}strong,b{font-weight:700}a{color:var(--accent-dark);text-decoration-thickness:.08em;text-underline-offset:.18em}a:hover{color:#9f251d}a:focus-visible,button:focus-visible{outline:3px solid rgb(var(--ink));outline-offset:4px;box-shadow:0 0 0 7px var(--yellow)}p{margin:0 0 1em}.prose p{margin-bottom:1.65em}.prose{font-size:clamp(1.05rem,2vw,1.18rem)}textarea,input{width:100%;font:inherit}table{width:100%;border-collapse:collapse}img{max-width:100%;height:auto;border-radius:var(--radius)}code{padding:.12em .32em;background-color:var(--paper-soft);border:1px solid var(--soft-rule);border-radius:3px;color:rgb(var(--ink))}pre{padding:1.35em;border:2px solid var(--rule);border-radius:var(--radius);background:var(--paper-soft);box-shadow:6px 6px #137f7340;overflow-x:auto}pre>code{all:unset}blockquote{position:relative;border-left:8px solid var(--red);padding:.3rem 0 .3rem 1.2rem;margin:2rem 0;font-size:clamp(1.25rem,3vw,1.6rem);color:rgb(var(--ink))}blockquote:before{content:"";position:absolute;left:-8px;bottom:-10px;width:72px;height:10px;background:var(--yellow)}hr{border:none;border-top:3px solid var(--rule);margin:2rem 0}@media (max-width: 720px){body{font-size:18px}main{max-width:calc(100% - 1.25rem);padding:1.25rem 0 2.5rem}}.sr-only{border:0;padding:0;margin:0;position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px 1px 1px 1px);clip:rect(1px,1px,1px,1px);clip-path:inset(50%);white-space:nowrap}
+a[data-astro-cid-eimmu3lg]{display:inline-block;text-decoration:none}a[data-astro-cid-eimmu3lg].active{font-weight:bolder;text-decoration:underline}header[data-astro-cid-3ef6ksr2]{position:sticky;top:0;z-index:10;margin:0;padding:0 clamp(.75rem,3vw,1.4rem);background:color-mix(in srgb,var(--paper-soft) 94%,transparent);border-bottom:4px solid var(--rule);backdrop-filter:blur(10px)}h2[data-astro-cid-3ef6ksr2]{margin:0;font-size:1rem;letter-spacing:.08em;text-transform:uppercase}h2[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2],h2[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2].active{text-decoration:none}nav[data-astro-cid-3ef6ksr2]{display:flex;align-items:center;justify-content:space-between;gap:1rem;max-width:var(--wide-width);margin:0 auto;min-height:72px}.internal-links[data-astro-cid-3ef6ksr2],.social-links[data-astro-cid-3ef6ksr2]{display:flex;align-items:center;gap:.35rem}nav[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{display:inline-flex;align-items:center;min-height:44px;padding:.45rem .65rem;color:rgb(var(--ink));border:2px solid transparent;text-decoration:none;font-size:.95rem;font-weight:700;line-height:1}nav[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]:hover{color:rgb(var(--ink));border-color:var(--rule);background:var(--paper);transform:rotate(-1deg)}nav[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2].active{color:var(--paper-soft);background:var(--red);border-color:var(--rule);box-shadow:5px 5px 0 var(--yellow);text-decoration:none;transform:rotate(-1deg)}@media (max-width: 720px){nav[data-astro-cid-3ef6ksr2]{min-height:auto;padding:.75rem 0;align-items:flex-start;flex-wrap:wrap}h2[data-astro-cid-3ef6ksr2]{width:100%}.internal-links[data-astro-cid-3ef6ksr2],.social-links[data-astro-cid-3ef6ksr2]{flex-wrap:wrap}nav[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{padding:.5rem .55rem}}footer[data-astro-cid-sz7xmlte]{margin-top:clamp(2rem,6vw,5rem);padding:2rem 1rem 5rem;background:var(--paper-soft);border-top:4px solid var(--rule);color:rgb(var(--muted));text-align:center}.social-links[data-astro-cid-sz7xmlte]{display:flex;flex-wrap:wrap;justify-content:center;gap:.65rem 1rem;margin-top:1em}.social-links[data-astro-cid-sz7xmlte] a[data-astro-cid-sz7xmlte]{color:rgb(var(--ink));text-decoration:none;border-bottom:3px solid var(--teal);font-weight:700}.social-links[data-astro-cid-sz7xmlte] a[data-astro-cid-sz7xmlte]:hover{color:var(--red);border-bottom-color:var(--red)}
+main[data-astro-cid-bvzihdzo]{width:calc(100% - 2rem);max-width:var(--wide-width);margin:0 auto;padding-top:clamp(1.5rem,4vw,3rem)}article[data-astro-cid-bvzihdzo]{display:grid;gap:clamp(1.5rem,4vw,3rem)}.hero-image[data-astro-cid-bvzihdzo]{width:100%;background:var(--paper-soft);border:4px solid var(--rule);box-shadow:var(--box-shadow)}.hero-image[data-astro-cid-bvzihdzo] img[data-astro-cid-bvzihdzo]{display:block;width:100%;margin:0;border-radius:0}.prose[data-astro-cid-bvzihdzo]{width:var(--content-width);max-width:100%;margin:auto;padding:0 0 clamp(2rem,6vw,5rem);color:rgb(var(--gray-dark))}.title[data-astro-cid-bvzihdzo]{position:relative;margin-bottom:clamp(1.5rem,4vw,2.5rem);padding:clamp(1.2rem,4vw,2rem) 0;text-align:left;line-height:1;border-top:4px solid var(--rule);border-bottom:4px solid var(--rule)}.title[data-astro-cid-bvzihdzo]:after{content:"";position:absolute;right:0;bottom:-11px;width:min(38vw,280px);height:18px;background:var(--yellow);border:3px solid var(--rule);transform:rotate(-1.5deg)}.title[data-astro-cid-bvzihdzo] h1[data-astro-cid-bvzihdzo]{margin:0;font-family:Georgia,Times New Roman,serif;font-size:clamp(2.4rem,7vw,5.2rem);line-height:.92}.date[data-astro-cid-bvzihdzo]{display:inline-flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem;padding:.4rem .6rem;background:var(--red);border:2px solid var(--rule);color:var(--paper-soft);font-size:.9rem;font-weight:700;line-height:1.2;transform:rotate(-1deg)}.last-updated-on[data-astro-cid-bvzihdzo]{font-style:normal;opacity:.88}@media (max-width: 720px){main[data-astro-cid-bvzihdzo]{width:calc(100% - 1.25rem)}.hero-image[data-astro-cid-bvzihdzo]{box-shadow:6px 6px 0 var(--yellow)}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <nav data-astro-cid-3ef6ksr2> <h2 data-astro-cid-3ef6ksr2><a href="/harry-blog/blog/" data-astro-cid-3ef6ksr2>Harry / Tech</a></h2> <div class="internal-links" data-astro-cid-3ef6ksr2> <a href="/harry-blog/blog/" class="active" aria-current="page" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> Blog </a>  <a href="/harry-blog/about/" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> About </a>  </div> <div class="social-links" data-astro-cid-3ef6ksr2> <a href="/harry-blog/resume/" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> Resume </a>  </div> </nav> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="hero-image" data-astro-cid-bvzihdzo> <img width="1020" height="510" src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%221440%22%20height%3D%22720%22%20viewBox%3D%220%200%201440%20720%22%3E%0A%09%09%3Cdefs%3E%0A%09%09%09%3Cpattern%20id%3D%22stripes%22%20width%3D%2222%22%20height%3D%2222%22%20patternUnits%3D%22userSpaceOnUse%22%20patternTransform%3D%22rotate(32)%22%3E%0A%09%09%09%09%3Crect%20width%3D%2222%22%20height%3D%2222%22%20fill%3D%22%23f4e6cf%22%2F%3E%0A%09%09%09%09%3Crect%20width%3D%2211%22%20height%3D%2222%22%20fill%3D%22%231f1b17%22%2F%3E%0A%09%09%09%3C%2Fpattern%3E%0A%09%09%09%3Cfilter%20id%3D%22paper%22%3E%0A%09%09%09%09%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%220.9%22%20numOctaves%3D%222%22%20stitchTiles%3D%22stitch%22%2F%3E%0A%09%09%09%09%3CfeColorMatrix%20type%3D%22saturate%22%20values%3D%220%22%2F%3E%0A%09%09%09%09%3CfeComponentTransfer%3E%0A%09%09%09%09%09%3CfeFuncA%20type%3D%22table%22%20tableValues%3D%220%200.045%22%2F%3E%0A%09%09%09%09%3C%2FfeComponentTransfer%3E%0A%09%09%09%3C%2Ffilter%3E%0A%09%09%3C%2Fdefs%3E%0A%09%09%3Crect%20width%3D%221440%22%20height%3D%22720%22%20fill%3D%22%23f4e6cf%22%2F%3E%0A%09%09%3Crect%20width%3D%221440%22%20height%3D%22720%22%20filter%3D%22url(%23paper)%22%20opacity%3D%220.55%22%2F%3E%0A%09%09%3Crect%20x%3D%2272%22%20y%3D%2272%22%20width%3D%221296%22%20height%3D%22576%22%20fill%3D%22none%22%20stroke%3D%22%231f1b17%22%20stroke-width%3D%228%22%2F%3E%0A%09%09%3Crect%20x%3D%22930%22%20y%3D%2282%22%20width%3D%22330%22%20height%3D%22330%22%20fill%3D%22url(%23stripes)%22%20stroke%3D%22%231f1b17%22%20stroke-width%3D%228%22%20transform%3D%22rotate(1%201095%20247)%22%2F%3E%0A%09%09%3Crect%20x%3D%22790%22%20y%3D%22252%22%20width%3D%22410%22%20height%3D%22220%22%20fill%3D%22%23137f73%22%20stroke%3D%22%231f1b17%22%20stroke-width%3D%228%22%20transform%3D%22rotate(-5%20995%20362)%22%2F%3E%0A%09%09%3Ccircle%20cx%3D%221215%22%20cy%3D%22510%22%20r%3D%22108%22%20fill%3D%22%23df3f31%22%20stroke%3D%22%231f1b17%22%20stroke-width%3D%228%22%2F%3E%0A%09%09%3Crect%20x%3D%22116%22%20y%3D%22112%22%20width%3D%22300%22%20height%3D%2258%22%20fill%3D%22%23df3f31%22%20stroke%3D%22%231f1b17%22%20stroke-width%3D%226%22%20transform%3D%22rotate(-2%20266%20141)%22%2F%3E%0A%09%09%3Ctext%20x%3D%22142%22%20y%3D%22151%22%20fill%3D%22%23fbf3e5%22%20font-family%3D%22Atkinson%2C%20ui-sans-serif%2C%20system-ui%2C%20sans-serif%22%20font-weight%3D%22700%22%20font-size%3D%2224%22%20letter-spacing%3D%228%22%3EHARRY%20%2F%20TECH%3C%2Ftext%3E%0A%09%09%3Crect%20x%3D%22116%22%20y%3D%22190%22%20width%3D%22185%22%20height%3D%2248%22%20fill%3D%22%23edbd37%22%20stroke%3D%22%231f1b17%22%20stroke-width%3D%225%22%2F%3E%0A%09%09%3Ctext%20x%3D%22138%22%20y%3D%22222%22%20fill%3D%22%231f1b17%22%20font-family%3D%22Atkinson%2C%20ui-sans-serif%2C%20system-ui%2C%20sans-serif%22%20font-weight%3D%22700%22%20font-size%3D%2218%22%20letter-spacing%3D%225%22%3EFIELD%20918BC8%3C%2Ftext%3E%0A%09%09%3Ctext%20x%3D%22116%22%20y%3D%22575%22%20fill%3D%22%231f1b17%22%20font-family%3D%22Georgia%2C%20Times%20New%20Roman%2C%20serif%22%20font-weight%3D%22800%22%20font-size%3D%2264%22%3E%E8%AE%93%20Claude%20Code%20%E6%8E%A5%E6%89%8B%E4%BD%A0%E6%AD%A3%E5%9C%A8%E7%94%A8%E7%9A%84%20Chrome%EF%BC%8C%E7%95%B6%E4%BD%A0%E7%9A%84%E7%80%8F%E8%A6%BD%E5%99%A8%E8%87%AA%E5%8B%95%E5%8C%96%E5%8A%A9%E6%89%8B%3C%2Ftext%3E%0A%09%09%3Cpath%20d%3D%22M116%20610H760%22%20stroke%3D%22%23137f73%22%20stroke-width%3D%2212%22%2F%3E%0A%09%3C%2Fsvg%3E" alt="" data-astro-cid-bvzihdzo> </div> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2026-06-19T00:00:00.000Z"> Jun 19, 2026 </time>  </div> <h1 data-astro-cid-bvzihdzo>讓 Claude Code 接手你正在用的 Chrome，當你的瀏覽器自動化助手</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>先講結論：你不用再為了讓 AI 幫你做事，特地另外開一個乾淨的瀏覽器、重新登入一次帳號。裝上 chrome-cdp-skill 這個 Claude Code Skill 之後，Claude 可以直接接手你現在開著、而且已經登入好的那個 Chrome，幫你彙整分頁上的資訊、抓 DOM、截圖、填表單、點按鈕。安裝就一行指令，啟用就在 Chrome 裡撥一個開關，前後不到五分鐘。</p>
+<p>要先講清楚定位：它動的是<strong>你自己</strong>那個瀏覽器、你自己已經登入的頁面，重點是把你手邊原本要手動做的事自動化掉，不是叫它去繞過授權攻別人的網站。請在你有權限存取的內容上使用，這點很重要。</p>
+<p>這篇我從「為什麼要用」一路寫到「實際裝起來、用 Claude Code 跑第一個任務」，最後是安全注意事項——這段很重要，用之前請務必看完。</p>
+<h2 id="它到底解決了什麼">它到底解決了什麼</h2>
+<p>以前用 Playwright、Selenium、Puppeteer 這類工具，每次都會開一個全新、乾淨、什麼登入狀態都沒有的瀏覽器。所以只要你要爬的網站需要登入，帳密、OAuth、驗證碼就全部得自己想辦法處理，光想就累。</p>
+<p>Chrome CDP（Chrome DevTools Protocol）的做法完全相反——它直接連上你正在用的那個 Chrome。差別在哪：</p>
+<ul>
+<li><strong>登入狀態和 Cookie 都還在</strong>：你已經登入的 Gmail、GitHub、公司內部系統，Claude 直接就看得到，不用再登一次。</li>
+<li><strong>看到的是當下的真實畫面</strong>：不是重新整理過的乾淨頁面，就是你工作到一半的那個狀態。</li>
+<li><strong>可以一次處理很多分頁</strong>：列出所有開著的分頁、截圖、抓結構、跨分頁比對，都做得到。</li>
+<li><strong>不用裝一堆肥依賴</strong>：chrome-cdp-skill 只要 Node.js 22+，不用 <code>npm install</code>，也不用 Puppeteer 或 Playwright。</li>
+</ul>
+<p>這裡有個地方很多人會誤會：CDP 連的是你本來就開著的 Chrome，省下的是「再多開一個瀏覽器」的成本，不是「比 headless 更省記憶體」。你那個開了幾十個分頁的 Chrome，本身一樣很吃資源。講白一點，它幫你省的是重複啟動瀏覽器跟重新登入的麻煩，不是記憶體。</p>
+<h2 id="平常可以拿來做什麼">平常可以拿來做什麼</h2>
+<p><strong>前端除錯</strong>：工程師可以叫 Claude 抓 DOM、看 console、截全頁圖，幫忙看自己開發中的 UI 是哪裡壞掉。這大概是最直接、也最不會踩到別人的用法。</p>
+<p><strong>自動化你自己的日常流程</strong>：一次讀好幾個你開著的分頁，幫你彙整報表、整理你自己後台的數據，或是把一篇你正在讀的長文濃縮完直接貼進你的編輯器。</p>
+<p><strong>整理你已登入服務裡的資訊</strong>：像是把你自己 GitHub 的未讀通知、你自己信箱的待辦、你自己訂單頁面的狀態，抓出來整理成清單，省去人工複製貼上。</p>
+<p><strong>社群跟內容輔助</strong>：看你自己經營的社群頁面當下的狀態，幫你草擬回覆或發文。</p>
+<blockquote>
+<p>共通前提：上面這些都是在操作<strong>你自己有權限的頁面</strong>。要去抓公開或第三方網站的資料前，先確認對方的服務條款跟 <code>robots.txt</code> 允不允許，別把這工具拿去做你本來就不該做的事。</p>
+</blockquote>
+<h2 id="怎麼裝">怎麼裝</h2>
+<h3 id="先準備好這些">先準備好這些</h3>
+<ul>
+<li>Node.js 22 以上（就只有這一個執行時依賴）</li>
+<li>已經裝好 Claude Code</li>
+<li>一個 Chromium 核心的瀏覽器，Chrome、Chromium、Brave、Edge、Vivaldi 都行（macOS、Linux、Windows 都可以）</li>
+</ul>
+<p>先確認 Node 版本：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">node</span><span style="color:#79B8FF"> --version</span></span>
+<span class="line"><span style="color:#6A737D"># 需要 v22.x.x 以上</span></span></code></pre>
+<h3 id="第一步安裝-skill">第一步：安裝 Skill</h3>
+<p>chrome-cdp-skill 的核心其實就是 <code>skills/chrome-cdp/</code> 這個資料夾。你只要把它放到 Claude Code 會載入 skill 的地方就行了。</p>
+<p><strong>方法 A：直接 clone 到 Claude Code 的 skills 目錄</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#79B8FF">cd</span><span style="color:#9ECBFF"> ~/.claude/skills</span></span>
+<span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> clone</span><span style="color:#9ECBFF"> https://github.com/pasky/chrome-cdp-skill.git</span></span></code></pre>
+<p>clone 完，把 <code>chrome-cdp-skill/skills/chrome-cdp/</code> 這個子目錄搬到 <code>~/.claude/skills/</code> 底下，讓 Claude Code 能直接掃到裡面的 <code>SKILL.md</code>；或者看你 Claude Code 的版本，直接保留 clone 下來的結構也可以。</p>
+<p><strong>方法 B：用 pi 套件管理器裝（如果你有在用 pi）</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">pi</span><span style="color:#9ECBFF"> install</span><span style="color:#9ECBFF"> git:github.com/pasky/chrome-cdp-skill@v1.0.1</span></span></code></pre>
+<blockquote>
+<p>補一句：這個 skill 設計成可以給很多種 agent 用（Claude Code、Cursor、Amp 等等），核心就是 <code>skills/chrome-cdp/</code> 這個目錄。不管你用哪種方式，只要這個目錄有被你的 agent 載入，就能用。</p>
+</blockquote>
+<h3 id="第二步把-chrome-的遠端除錯打開">第二步：把 Chrome 的遠端除錯打開</h3>
+<p>這步是這個 skill 比傳統做法輕鬆的地方。你不用關掉 Chrome，也不用從終端機帶 <code>--remote-debugging-port=9222</code> 重開——那是舊做法了。</p>
+<p>現在只要：</p>
+<ol>
+<li>在 Chrome 網址列輸入 <code>chrome://inspect/#remote-debugging</code></li>
+<li>把頁面上那個開關撥開</li>
+<li>沒了，這樣就好。</li>
+</ol>
+<p>CLI 會自動偵測你的瀏覽器跟對應的 debug port。</p>
+<blockquote>
+<p>進階：如果你的瀏覽器把 <code>DevToolsActivePort</code> 存在比較奇怪的位置，設一個環境變數 <code>CDP_PORT_FILE</code> 指到那個檔案的完整路徑就行。</p>
+</blockquote>
+<h3 id="第三步重啟-claude-code">第三步：重啟 Claude Code</h3>
+<p>讓 Claude Code 重新掃一次、把 skill 載進來。你可以用 <code>/skills</code> 這類指令確認 <code>chrome-cdp</code> 有出現在清單裡。</p>
+<h2 id="用-claude-code-操控瀏覽器">用 Claude Code 操控瀏覽器</h2>
+<p>裝好以後，你其實不用記任何 CLI 指令——直接用講的叫 Claude 做事就好，它會自己去呼叫這個 skill。不過知道底下的指令在幹嘛還是有幫助，至少你想自己手動測的時候知道怎麼下。</p>
+<h3 id="底層-cli-指令對照">底層 CLI 指令對照</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>指令</th><th>作用</th></tr></thead><tbody><tr><td><code>cdp list</code></td><td>列出所有開著的分頁</td></tr><tr><td><code>cdp shot tab1</code></td><td>對指定分頁截圖</td></tr><tr><td><code>cdp snap tab1</code></td><td>抓該分頁的無障礙樹（accessibility tree）</td></tr><tr><td><code>cdp html tab1 ".main"</code></td><td>抓指定 CSS selector 的 HTML</td></tr><tr><td><code>cdp click tab1 ".button"</code></td><td>依 selector 點擊元素</td></tr><tr><td><code>cdp type tab1 "Hello AI"</code></td><td>在聚焦的元素輸入文字</td></tr></tbody></table>
+<h3 id="實際對話範例">實際對話範例</h3>
+<p>裝好之後，在 Claude Code 裡你可以直接這樣講：</p>
+<p><strong>範例一：抓登入後才看得到的資料</strong></p>
+<blockquote>
+<p>「我現在 Chrome 開著我的 GitHub notifications 分頁，幫我把所有未讀通知的標題和連結整理成一個清單。」</p>
+</blockquote>
+<p>Claude 會自己列出分頁、找到那個 GitHub 分頁、抓結構、整理成清單給你，全程用你已經登入的 session，你不用給任何帳密。</p>
+<p><strong>範例二：跨分頁比對</strong></p>
+<blockquote>
+<p>「我開了三個分頁分別是三家飯店的訂房頁面，幫我比對它們的價格、可取消政策、含不含早餐，做成表格。」</p>
+</blockquote>
+<p><strong>範例三：整理動態載入的後台資料</strong></p>
+<blockquote>
+<p>「幫我打開我自己後台的訂單列表，往下滾動把所有載入的訂單編號和金額抓下來，存成 CSV。」</p>
+</blockquote>
+<p><strong>範例四：自動填表單</strong></p>
+<blockquote>
+<p>「這個分頁的表單，幫我把姓名填『Harry Fan』、email 填我的工作信箱，然後先不要送出，截圖給我確認。」</p>
+</blockquote>
+<h3 id="關於-daemon-的小知識">關於 daemon 的小知識</h3>
+<p>chrome-cdp 的設計是每個分頁都會留一個常駐的背景 daemon。好處是 Chrome 那個「允許偵錯」的彈窗，每個分頁只跳一次，而不是你每下一個指令就跳一次——所以就算你開了 100 多個分頁，它也跑得穩。Daemon 閒置 20 分鐘後會自己結束。</p>
+<h2 id="安全注意事項請務必看完">安全注意事項（請務必看完）</h2>
+<p>這個工具的優點跟風險其實是同一件事的兩面：它能存取你所有已經登入的 session，反過來說，任何能連上那個 debug 通道的程式，理論上也能完全控制你的瀏覽器——你的 Gmail、公司系統、銀行分頁全都算在內。</p>
+<p>實際使用請守住這幾點：</p>
+<ul>
+<li><strong>只在你信得過的環境開</strong>：不要在公共 Wi-Fi、共用電腦上開遠端除錯。用完就把 <code>chrome://inspect/#remote-debugging</code> 的開關撥回去關掉。</li>
+<li><strong>不要把 debug port 對外開放</strong>：遠端除錯預設只綁 <code>127.0.0.1</code>（也就是本機）。千萬不要為了遠端存取，把它綁到 <code>0.0.0.0</code> 或對外網開放。</li>
+<li><strong>裝之前先看一下程式碼</strong>：裝任何第三方 skill 之前，最好先翻一下它的腳本內容。Anthropic 管不到、也沒辦法保證第三方 skill 的行為。</li>
+<li><strong>危險操作先讓它停下來確認</strong>：像範例四那樣，遇到送出表單、發訊息、刪除這種收不回來的動作，叫 Claude 先截圖或先把它要做的事列出來給你看，確認過再做。</li>
+<li><strong>重要帳號考慮另開一個 profile</strong>：如果你會常常跑自動化，可以另外開一個 Chrome profile 專門做這件事，跟你平常的主 profile 分開，誤操作的風險會低很多。</li>
+</ul>
+<h2 id="講一句總結">講一句總結</h2>
+<p>chrome-cdp-skill 把 Chrome DevTools Protocol 這個底層能力，包成一個在 Claude Code 一行就裝好、一個開關就啟用的 skill，讓你用講的就能叫 Claude 接手你正在用的那個真實瀏覽器，幫你彙整、比對、填表單。它幫你省的是手動操作跟重複登入的時間——前提是你只動自己有權限的頁面，並把存取安全管好。</p>
+<hr>
+<p>參考來源：<a href="https://github.com/pasky/chrome-cdp-skill">pasky/chrome-cdp-skill（GitHub）</a>官方說明文件</p>  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2026 Harry. All rights reserved.
+<div class="social-links" data-astro-cid-sz7xmlte> <a href="/harry-blog/blog/" data-astro-cid-sz7xmlte>Blog</a> <a href="/harry-blog/about/" data-astro-cid-sz7xmlte>About</a> <a href="https://drive.google.com/drive/folders/1R9Y6o3wxsuKGQ9Apyif0nuUccLHtDHHr" target="_blank" rel="noopener noreferrer" data-astro-cid-sz7xmlte>
+技術履歷
+<span class="sr-only" data-astro-cid-sz7xmlte>（新分頁開啟）</span> </a> <a href="https://podcasts.apple.com/tw/podcast/%E5%A6%96%E4%BD%A0%E8%81%BD%E6%96%B0%E8%81%9E/id1836788949" target="_blank" rel="noopener noreferrer" data-astro-cid-sz7xmlte>
+妖你聽新聞（Podcast）
+<span class="sr-only" data-astro-cid-sz7xmlte>（新分頁開啟）</span> </a> </div> </footer>  </body></html>
