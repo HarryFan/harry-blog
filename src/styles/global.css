@@ -147,6 +147,13 @@ table {
 	width: 100%;
 	border-collapse: collapse;
 }
+/* wide tables scroll inside their column on small screens instead of overflowing the page */
+.prose table {
+	display: block;
+	max-width: 100%;
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+}
 img {
 	max-width: 100%;
 	height: auto;
