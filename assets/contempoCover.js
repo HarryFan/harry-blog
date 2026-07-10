@@ -14,7 +14,7 @@ const $$HeaderLink = createComponent(($$result, $$props, $$slots) => {
   const { href, class: className, ...props } = Astro2.props;
   const rawHref = typeof href === "string" ? href : href?.toString() ?? "/";
   const normalizePath = (input) => {
-    const base = "/harry-blog/";
+    const base = "/";
     let path = input.startsWith(base) ? input.slice(base.length - 1) : input;
     if (!path.startsWith("/")) path = `/${path}`;
     path = path.replace(/\/+/g, "/");
@@ -25,24 +25,24 @@ const $$HeaderLink = createComponent(($$result, $$props, $$slots) => {
   const targetPath = normalizePath(rawHref);
   const currentTopLevel = `/${currentPath.split("/").filter(Boolean)[0] ?? ""}`;
   const isActive = targetPath === currentPath || targetPath !== "/" && targetPath === currentTopLevel;
-  const resolvedHref = rawHref.startsWith("/") ? `${"/harry-blog/"}${rawHref.slice(1)}` : rawHref;
+  const resolvedHref = rawHref.startsWith("/") ? `${"/"}${rawHref.slice(1)}` : rawHref;
   return renderTemplate`${maybeRenderHead()}<a${addAttribute(resolvedHref, "href")}${addAttribute([className, { active: isActive }], "class:list")}${addAttribute(isActive ? "page" : void 0, "aria-current")}${spreadAttributes(props)} data-astro-cid-eimmu3lg> ${renderSlot($$result, $$slots["default"])} </a> `;
-}, "/home/runner/work/harry-blog/harry-blog/src/components/HeaderLink.astro", void 0);
+}, "/Users/gangshuanfan/Documents/Astro/harry-blog/src/components/HeaderLink.astro", void 0);
 
 const $$Header = createComponent(($$result, $$props, $$slots) => {
-  return renderTemplate`${maybeRenderHead()}<header data-astro-cid-3ef6ksr2> <nav data-astro-cid-3ef6ksr2> <h2 data-astro-cid-3ef6ksr2><a${addAttribute(`${"/harry-blog/"}blog/`, "href")} data-astro-cid-3ef6ksr2>${SITE_TITLE}</a></h2> <div class="internal-links" data-astro-cid-3ef6ksr2> ${renderComponent($$result, "HeaderLink", $$HeaderLink, { "href": "/blog/", "data-astro-cid-3ef6ksr2": true }, { "default": ($$result2) => renderTemplate`Blog` })} ${renderComponent($$result, "HeaderLink", $$HeaderLink, { "href": "/about/", "data-astro-cid-3ef6ksr2": true }, { "default": ($$result2) => renderTemplate`About` })} </div> <div class="social-links" data-astro-cid-3ef6ksr2> ${renderComponent($$result, "HeaderLink", $$HeaderLink, { "href": "/resume/", "data-astro-cid-3ef6ksr2": true }, { "default": ($$result2) => renderTemplate`Resume` })} </div> </nav> </header> `;
-}, "/home/runner/work/harry-blog/harry-blog/src/components/Header.astro", void 0);
+  return renderTemplate`${maybeRenderHead()}<header data-astro-cid-3ef6ksr2> <nav data-astro-cid-3ef6ksr2> <h2 data-astro-cid-3ef6ksr2><a${addAttribute(`${"/"}blog/`, "href")} data-astro-cid-3ef6ksr2>${SITE_TITLE}</a></h2> <div class="internal-links" data-astro-cid-3ef6ksr2> ${renderComponent($$result, "HeaderLink", $$HeaderLink, { "href": "/blog/", "data-astro-cid-3ef6ksr2": true }, { "default": ($$result2) => renderTemplate`Blog` })} ${renderComponent($$result, "HeaderLink", $$HeaderLink, { "href": "/about/", "data-astro-cid-3ef6ksr2": true }, { "default": ($$result2) => renderTemplate`About` })} </div> <div class="social-links" data-astro-cid-3ef6ksr2> ${renderComponent($$result, "HeaderLink", $$HeaderLink, { "href": "/resume/", "data-astro-cid-3ef6ksr2": true }, { "default": ($$result2) => renderTemplate`Resume` })} </div> </nav> </header> `;
+}, "/Users/gangshuanfan/Documents/Astro/harry-blog/src/components/Header.astro", void 0);
 
 const $$Footer = createComponent(($$result, $$props, $$slots) => {
   const today = /* @__PURE__ */ new Date();
   return renderTemplate`${maybeRenderHead()}<footer data-astro-cid-sz7xmlte>
 &copy; ${today.getFullYear()} Harry. All rights reserved.
-<div class="social-links" data-astro-cid-sz7xmlte> <a${addAttribute(`${"/harry-blog/"}blog/`, "href")} data-astro-cid-sz7xmlte>Blog</a> <a${addAttribute(`${"/harry-blog/"}about/`, "href")} data-astro-cid-sz7xmlte>About</a> <a href="https://drive.google.com/drive/folders/1R9Y6o3wxsuKGQ9Apyif0nuUccLHtDHHr" target="_blank" rel="noopener noreferrer" data-astro-cid-sz7xmlte>
+<div class="social-links" data-astro-cid-sz7xmlte> <a${addAttribute(`${"/"}blog/`, "href")} data-astro-cid-sz7xmlte>Blog</a> <a${addAttribute(`${"/"}about/`, "href")} data-astro-cid-sz7xmlte>About</a> <a href="https://drive.google.com/drive/folders/1R9Y6o3wxsuKGQ9Apyif0nuUccLHtDHHr" target="_blank" rel="noopener noreferrer" data-astro-cid-sz7xmlte>
 技術履歷
-<span class="sr-only" data-astro-cid-sz7xmlte>（新分頁開啟）</span> </a> <a href="https://podcasts.apple.com/tw/podcast/%E5%A6%96%E4%BD%A0%E8%81%BD%E6%96%B0%E8%81%9E/id1836788949" target="_blank" rel="noopener noreferrer" data-astro-cid-sz7xmlte>
-妖你聽新聞（Podcast）
+<span class="sr-only" data-astro-cid-sz7xmlte>（新分頁開啟）</span> </a> <a href="http://linktr.ee/yaonews" target="_blank" rel="noopener noreferrer" data-astro-cid-sz7xmlte>
+妖你聽新聞
 <span class="sr-only" data-astro-cid-sz7xmlte>（新分頁開啟）</span> </a> </div> </footer> `;
-}, "/home/runner/work/harry-blog/harry-blog/src/components/Footer.astro", void 0);
+}, "/Users/gangshuanfan/Documents/Astro/harry-blog/src/components/Footer.astro", void 0);
 
 const $$Astro = createAstro("https://harryfan.github.io");
 const $$FormattedDate = createComponent(($$result, $$props, $$slots) => {
@@ -54,7 +54,7 @@ const $$FormattedDate = createComponent(($$result, $$props, $$slots) => {
     month: "short",
     day: "numeric"
   })} </time>`;
-}, "/home/runner/work/harry-blog/harry-blog/src/components/FormattedDate.astro", void 0);
+}, "/Users/gangshuanfan/Documents/Astro/harry-blog/src/components/FormattedDate.astro", void 0);
 
 const publicDir = fileURLToPath(new URL("../../public/", import.meta.url));
 const escapeSvgText = (input) => input.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
@@ -70,7 +70,7 @@ const resolveHeroSrc = (input) => {
   if (!input.startsWith("/")) return input;
   const absolutePath = path.join(publicDir, input.slice(1));
   if (!fs.existsSync(absolutePath)) return void 0;
-  return `${"/harry-blog/"}${input.slice(1)}`;
+  return `${"/"}${input.slice(1)}`;
 };
 const coverSvgDataUri = (postTitle) => {
   const hash = hashTitle(postTitle);

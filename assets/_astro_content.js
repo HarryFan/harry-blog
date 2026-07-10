@@ -127,7 +127,7 @@ function dataStoreSingleton() {
 }
 const globalDataStore = dataStoreSingleton();
 
-const __vite_import_meta_env__ = {"ASSETS_PREFIX": "/harry-blog/", "BASE_URL": "/harry-blog/", "DEV": false, "MODE": "production", "PROD": true, "SITE": "https://harryfan.github.io", "SSR": true};
+const __vite_import_meta_env__ = {"ASSETS_PREFIX": "", "BASE_URL": "/", "DEV": false, "MODE": "production", "PROD": true, "SITE": "https://harryfan.github.io", "SSR": true};
 function createCollectionToGlobResultMap({
   globResult,
   contentDir
